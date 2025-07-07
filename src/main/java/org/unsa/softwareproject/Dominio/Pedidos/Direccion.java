@@ -1,4 +1,4 @@
-package Model.Dominio.Pedidos;
+package org.unsa.softwareproject.Dominio.Pedidos;
 
 public class Direccion {
     private String calle;
