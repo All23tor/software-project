@@ -30,12 +30,44 @@ public class Entrega {
 
     public void registrarRecojo() {
         // TODO implement here
-        this.estado EstadoEntrega.RECOGIDO;
+        this.estado = EstadoEntrega.RECOGIDO;
         this.fechaHoraRecojo = new Date();
     }
 
     public void actualizarUbicacion(String coordenadas) {
         // TODO implement here
         this.ubicacionActualRepartidor = coordenadas;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getIdPedido() {
+        return idPedido;
+    }
+
+    public int getIdRepartidor() {
+        return idRepartidor;
+    }
+
+    public EstadoEntrega getEstado() {
+        return estado;
+    }
+
+    public Date getFechaHoraAsignacion() {
+        return fechaHoraAsignacion;
+    }
+
+    public Date getFechaHoraRecojo() {
+        return fechaHoraRecojo;
+    }
+
+    public Date getFechaHoraEntrega() {
+        return fechaHoraEntrega;
+    }
+
+    public String getUbicacionActualRepartidor() {
+        return ubicacionActualRepartidor;
     }
 }

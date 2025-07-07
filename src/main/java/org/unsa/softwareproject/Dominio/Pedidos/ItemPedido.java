@@ -7,12 +7,12 @@ public class ItemPedido {
     private int idPlato;
     private String nombrePlato;
     private int cantidad;
-    public Dinero precioUnitario;
+    private Dinero precioUnitario;
     private Dinero subtotal;
 
     public Dinero calcularSubtotal() {
         // TODO implement here
-        this.subtotal = precioUnitario.multiplicar(cantidad) //falta crear el metodo multiplicar en dinero
+        this.subtotal = precioUnitario.multiplicar(cantidad); //falta crear el metodo multiplicar en dinero
         return this.subtotal;
     }
 
@@ -25,4 +25,35 @@ public class ItemPedido {
         this.calcularSubtotal();
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public int getIdPlato() {
+        return idPlato;
+    }
+
+    public String getNombrePlato() {
+        return nombrePlato;
+    }
+
+    public void setNombrePlato(String nombrePlato) {
+        this.nombrePlato = nombrePlato;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public Dinero getPrecioUnitario() {
+        return precioUnitario;
+    }
+
+    public void setPrecioUnitario(Dinero precioUnitario) {
+        this.precioUnitario = precioUnitario;
+    }
+
+    public Dinero getSubtotal() {
+        return subtotal;
+    }
 }

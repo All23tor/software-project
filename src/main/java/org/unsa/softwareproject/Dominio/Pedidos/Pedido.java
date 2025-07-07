@@ -15,9 +15,9 @@ public class Pedido {
     private Dinero montoTotal;
     private String instruccionesEspeciales;
     private Direccion direccionEntrega;
-    public Restaurante restaurante;
-    public List<ItemPedido> items;
-    private int idRepartidor
+    private Restaurante restaurante;
+    private List<ItemPedido> items;
+    private int idRepartidor;
 
     public void añadirItem(ItemPedido item) {
         // TODO implement here
@@ -38,9 +38,9 @@ public class Pedido {
 
     public Dinero calcularMontoTotal() {
         // TODO implement here
-        Dinero total = new Dinero(0.0 "PEN"); //constructor de dinero
+        Dinero total = new Dinero(0.0, "PEN"); //constructor de dinero
         for (ItemPedido item : items) {
-            total = total.sumar(item.calcularSubtotal()) //Metodo sumar de Dinero
+            total = total.sumar(item.calcularSubtotal());
         }
         this.montoTotal = total;
         return total;
@@ -49,10 +49,10 @@ public class Pedido {
     public void asignarRepartidor(int idRepartidor) {
         // TODO implement here
         if (this.estado != EstadoPedido.LISTO_PARA_RECOGER) {
-            thorw new IllegalArgumentException("No se puede asignar repartidor. Estado actual." + this.estado);
+            throw new IllegalArgumentException("No se puede asignar repartidor. Estado actual." + this.estado);
         }
 
-        if (this.idRepartidor <= 0) {
+        if (idRepartidor <= 0) {
             throw new IllegalArgumentException("El id del repartidor debe ser positivo.");
         }
 
@@ -66,12 +66,7 @@ public class Pedido {
         if (this.estado == EstadoPedido.ENTREGADO){
             throw new IllegalStateException("No se puede cancelar un pedido entregado.");
         }
-        this.estado = EstadoPedido.CANCELADO
-    }
-
-    public List<ItemPedido> obtenerItems() {
-        // TODO implement here
-        return new ArrayList<>(this.items);
+        this.estado = EstadoPedido.CANCELADO;
     }
 
     public int getId() {
@@ -111,8 +106,8 @@ public class Pedido {
     }
 
     public List<ItemPedido> getItems() {
-        return new ArrayList<>(items); // Copia defensiva
-    }
+        return new ArrayList<>(items);
+
 
     public int getIdRepartidor() {
         return idRepartidor;
