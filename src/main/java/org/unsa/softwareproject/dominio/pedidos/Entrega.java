@@ -1,4 +1,4 @@
-package org.unsa.softwareproject.Dominio.Pedidos;
+package org.unsa.softwareproject.dominio.pedidos;
 
 import java.util.Date;
 
@@ -12,16 +12,13 @@ public class Entrega {
     private Date fechaHoraEntrega;
     private String ubicacionActualRepartidor;
 
-
     public void asignarRepartidor(String idRepartidor) {
-        // TODO implement here
         this.idRepartidor = Integer.parseInt(idRepartidor);
         this.estado = EstadoEntrega.ASIGNADO;
         this.fechaHoraAsignacion = new Date();
     }
 
     public void actualizarEstado(EstadoEntrega nuevoEstado) {
-        // TODO implement here
         if (this.estado == EstadoEntrega.ENTREGADO && nuevoEstado != EstadoEntrega.INCIDENCIA) {
             throw new IllegalStateException("No se puede cambiar el estado de una entrega ya completada");
         }
@@ -29,13 +26,11 @@ public class Entrega {
     }
 
     public void registrarRecojo() {
-        // TODO implement here
         this.estado = EstadoEntrega.RECOGIDO;
         this.fechaHoraRecojo = new Date();
     }
 
     public void actualizarUbicacion(String coordenadas) {
-        // TODO implement here
         this.ubicacionActualRepartidor = coordenadas;
     }
 

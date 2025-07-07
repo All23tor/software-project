@@ -1,4 +1,4 @@
-package org.unsa.softwareproject.Dominio.Pedidos;
+package org.unsa.softwareproject.dominio.pedidos;
 
 public enum EstadoEntrega {
     ASIGNADO,

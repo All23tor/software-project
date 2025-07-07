@@ -1,4 +1,4 @@
-package org.unsa.softwareproject.Dominio.Pedidos;
+package org.unsa.softwareproject.dominio.pedidos;
 
 import Model.Dominio.Restaurantes.Dinero;
 import Model.Dominio.Restaurantes.Restaurante;

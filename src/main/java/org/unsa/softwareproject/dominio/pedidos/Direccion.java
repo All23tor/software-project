@@ -1,4 +1,4 @@
-package org.unsa.softwareproject.Dominio.Pedidos;
+package org.unsa.softwareproject.dominio.pedidos;
 
 public class Direccion {
     private String calle;
@@ -7,14 +7,12 @@ public class Direccion {
     private String distrito;
     private String coordenadas;
 
-    //public Pedido 1;
-
     public boolean esValida() {
-        // TODO implement here
         return calle != null && !calle.isEmpty()
             && numero > 0
             && ciudad != null
-            && distrito != null;
+            && distrito != null
+            && coordenadas != null;
     }
 
     public String getCalle() {
@@ -47,6 +45,14 @@ public class Direccion {
 
     public void setDistrito(String distrito) {
         this.distrito = distrito;
+    }
+
+    public String getCoordenadas() {
+        return coordenadas;
+    }
+
+    public void setCoordenadas(String coordenadas) {
+        this.coordenadas = coordenadas;
     }
 
     public String getCoordenadas() {
