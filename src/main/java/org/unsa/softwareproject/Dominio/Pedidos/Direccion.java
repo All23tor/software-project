@@ -7,11 +7,14 @@ public class Direccion {
     private String distrito;
     private String coordenadas;
 
-    public Pedido 1;
+    //public Pedido 1;
 
     public boolean esValida() {
         // TODO implement here
-        return false;
+        return calle != null && !calle.isEmpty()
+            && numero > 0
+            && ciudad != null
+            && distrito != null;
     }
 
 }
