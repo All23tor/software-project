@@ -13,7 +13,7 @@ Este módulo forma parte del proyecto `software-project`. El objetivo principal 
 ---
 
 ## Análisis SonarLint
-![Reporte SonarLint](sonarlint-report.png)
+![Reporte SonarLint](sonarlint-reporte.png)
 El analisis estatico de los archivos del modulo `Pedidos` detectó un total de **13 Code Smells** distribuidos en 5 archivos. A continuacion, se detallan los principales problemas detectados y su respectiva solucion.
 
 ---
