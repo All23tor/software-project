@@ -1,6 +1,6 @@
 package org.unsa.softwareproject.dominio.pedidos;
 
-import Model.Dominio.Restaurantes.Dinero;
+import org.unsa.softwareproject.dominio.Restaurantes.Dinero;
 
 public class ItemPedido {
     private int id;
@@ -11,9 +11,17 @@ public class ItemPedido {
     private Dinero subtotal;
 
     public Dinero calcularSubtotal() {
-        this.subtotal = precioUnitario.multiplicar(cantidad); //falta crear el metodo multiplicar en dinero
+        validarCantidad();
+        this.subtotal = precioUnitario.multiplicar(cantidad);
         return this.subtotal;
     }
+
+    private void validarCantidad() {
+        if (cantidad <= 0) {
+            throw new IllegalArgumentException("La cantidad debe ser mayor a 0");
+        }
+    }
+
 
     public void actualizarCantidad(int nuevaCantidad) {
         if (nuevaCantidad <= 0) {
