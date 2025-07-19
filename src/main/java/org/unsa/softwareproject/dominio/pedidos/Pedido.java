@@ -1,8 +1,9 @@
 package org.unsa.softwareproject.dominio.pedidos;
 
-import Model.Dominio.Restaurantes.Dinero;
-import Model.Dominio.Restaurantes.Restaurante;
+import org.unsa.softwareproject.dominio.Restaurantes.Dinero;
+import org.unsa.softwareproject.dominio.Restaurantes.Restaurante;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

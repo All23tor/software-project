@@ -1,6 +1,6 @@
 package org.unsa.softwareproject.dominio.pedidos;
 
-import Model.Dominio.Restaurantes.Dinero;
+import org.unsa.softwareproject.dominio.Restaurantes.Dinero;
 
 public class ItemPedido {
     private int id;
