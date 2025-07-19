@@ -20,7 +20,6 @@ public class Pedido {
     private int idRepartidor;
 
     public void añadirItem(ItemPedido item) {
-        // TODO implement here
         if (item == null) {
             throw new IllegalArgumentException("El ítem no puede ser nulo");
         }
@@ -29,7 +28,6 @@ public class Pedido {
     }
 
     public void actualizarEstado(EstadoPedido nuevoEstado) {
-        // TODO implement here
         if (this.estado == EstadoPedido.ENTREGADO || this.estado == EstadoPedido.CANCELADO) {
             throw new IllegalStateException("No se puede actualizar un pedido finalizado.");
         }
@@ -37,17 +35,13 @@ public class Pedido {
     }
 
     public Dinero calcularMontoTotal() {
-        // TODO implement here
-        Dinero total = new Dinero(0.0, "PEN"); //constructor de dinero
-        for (ItemPedido item : items) {
-            total = total.sumar(item.calcularSubtotal());
-        }
-        this.montoTotal = total;
-        return total;
+        this.montoTotal = items.stream()
+                .map(ItemPedido::calcularSubtotal)
+                .reduce(new Dinero(0.0, "PEN"), Dinero::sumar);
+        return this.montoTotal;
     }
 
     public void asignarRepartidor(int idRepartidor) {
-        // TODO implement here
         if (this.estado != EstadoPedido.LISTO_PARA_RECOGER) {
             throw new IllegalArgumentException("No se puede asignar repartidor. Estado actual." + this.estado);
         }
@@ -62,7 +56,6 @@ public class Pedido {
     }
 
     public void cancelar() {
-        // TODO implement here
         if (this.estado == EstadoPedido.ENTREGADO){
             throw new IllegalStateException("No se puede cancelar un pedido entregado.");
         }
@@ -107,7 +100,7 @@ public class Pedido {
 
     public List<ItemPedido> getItems() {
         return new ArrayList<>(items);
-
+    }
 
     public int getIdRepartidor() {
         return idRepartidor;
