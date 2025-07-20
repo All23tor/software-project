@@ -159,3 +159,50 @@ public void addItem(ItemPedido item) {
     this.montoTotal = this.calcularMontoTotal();
 }
 ```
+
+# Laboratorio 11 Clean Code
+---
+# Buenas Practicas Aplicadas
+---
+> **1.- Nombres**: Se cambiaron nombres como calcularMonto → calcularMontoTotal, actualizar → actualizarEstado para reflejar con precisión la acción realizada.
+Variables como monto -> montoTotal, listaItems -> items,  para una mejor comprensión.
+---
+> **2.- Funciones**:Se dividieron responsabilidades dentro de funciones. Por ejemplo:
+addItem() ahora valida la entrada y actualiza el monto.
+asignarRepartidor() verifica condiciones antes de cambiar estado.
+---
+> **3.- Comentarios**: Se añadieron comentarios Javadoc a métodos públicos en ItemPedido
+```java
+    /**
+     * Actualiza la cantidad del ítem y recalcula el subtotal.
+     * @param nuevaCantidad cantidad nueva a asignar
+     */
+    public void actualizarCantidad(int nuevaCantidad) {
+        setCantidad(nuevaCantidad);
+        calcularSubtotal();
+    }
+```
+---
+> **4.- Estructura del Codigo Fuente**: Se maneja un orden logico atributos->constructor->metodos publicos->getters/setters->metodos  privados.
+---
+> **5.- Objetos y Estructuras de Datos**: Se respeto el principio de encapsulamiento
+La lista de ítems se retorna como copia (new ArrayList<>(items)) para evitar modificaciones externas.
+La clase Dinero encapsula correctamente operaciones monetarias, protegiendo la integridad del valor total del pedido.
+---
+> **6.- Tratamiento de Errores**:Se usaron excepciones específicas (IllegalArgumentException, IllegalStateException) en validaciones
+```java
+if (estado == null) {
+    throw new IllegalArgumentException("El estado no puede ser nulo");
+}
+
+```
+---
+> **7.- Clases**:
+Clases como Direccion, ItemPedido, Entrega y Pedido ahora tienen:
+
+Métodos con responsabilidad única.
+Encapsulamiento claro y coherente.
+Uso de clases auxiliares (Dinero, Direccion) para separar responsabilidades y facilitar pruebas.
+
+# SonarLint
+Tras realizar las buenas practicas descritas, no se encontraron bugs, code smells ni vulnerabilidades
