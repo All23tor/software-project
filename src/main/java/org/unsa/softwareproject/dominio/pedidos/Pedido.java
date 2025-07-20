@@ -20,7 +20,7 @@ public class Pedido {
     private List<ItemPedido> items;
     private int idRepartidor;
 
-    public void añadirItem(ItemPedido item) {
+    public void addItem(ItemPedido item) {
         if (item == null) {
             throw new IllegalArgumentException("El ítem no puede ser nulo");
         }

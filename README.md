@@ -1,9 +1,11 @@
 # Módulo: Pedidos
 
-Este módulo forma parte del proyecto `software-project`. El objetivo principal fue aplicar estándares de codificación, buenas prácticas y herramientas de análisis estático para mejorar la calidad del software.
-
+Este módulo forma parte del proyecto `software-project`.
 ---
 
+# Laboratorio 9
+
+---
 ## Objetivos del Trabajo
 
 - Aplicar convenciones de codificación del lenguaje Java (nombres, estructura, comentarios).
@@ -84,3 +86,76 @@ package org.unsa.softwareproject.Dominio.Pedidos;
 
 ## Referencias
 - https://www.oracle.com/java/technologies/javase/codeconventions-contents.html
+
+# Laboratorio 10
+
+---
+
+# Estilos aplicados:
+
+
+> **Cookbook**: Se aplicó el estilo Cookbook al dividir responsabilidades en métodos pequeños y reutilizables. Ejemplo en `ItemPedido.java`:
+
+```java
+private void validarCantidad() {
+    if (cantidad <= 0) {
+        throw new IllegalArgumentException("La cantidad debe ser mayor a 0");
+    }
+}
+```
+---
+
+> **Guard Clauses + Error Handling**: Se aplicó Guard Clauses junto con manejo de errores para simplificar el control de flujo y validar condiciones antes de continuar. Ejemplos en Pedido.java y Entrega.java
+```java
+public void cancelar() {
+    if (this.estado == EstadoPedido.ENTREGADO){
+        throw new IllegalStateException("No se puede cancelar un pedido entregado.");
+    }
+    this.estado = EstadoPedido.CANCELADO;
+}
+```
+```java
+if (nuevoEstado == null) {
+    throw new IllegalArgumentException("El nuevo estado no puede ser nulo.");
+}
+```
+---
+
+> **Pipeline**: Se usó estilo Pipeline en el método calcularMontoTotal() de Pedido, con flujo de operaciones encadenadas.
+```java
+public Dinero calcularMontoTotal() {
+    this.montoTotal = items.stream()
+        .map(ItemPedido::calcularSubtotal)
+        .reduce(new Dinero(0.0, "PEN"), Dinero::sumar);
+    return this.montoTotal;
+}
+```
+---
+> **Things**: El proyecto aplica principios del estilo Thing-First Design al definir entidades del dominio (Pedido, Entrega, ItemPedido, EstadoEntrega, etc.) como clases diferenciadas. Este enfoque estructura el diseño en base a objetos que representan cosas del mundo real.
+
+# Errores detectados por SonarLint
+
+> **1.- En Entrega.java**: Merge this if statement with the enclosing one.
+> **Solucion**
+```java
+public void actualizarEstado(EstadoEntrega nuevoEstado) {
+    if (this.estado == EstadoEntrega.ENTREGADO && nuevoEstado != EstadoEntrega.INCIDENCIA) {
+        throw new IllegalStateException("No se puede cambiar el estado de una entrega ya completada");
+    }
+    if (nuevoEstado == null) {
+        throw new IllegalArgumentException("El nuevo estado no puede ser nulo.");
+    }
+    this.estado = nuevoEstado;
+}
+```
+> **2.- En Pedido.java**: Rename this method name to match the regular expression "^[a-z][a-zA-Z0-9]*$".
+> **Solucion**
+```java
+public void addItem(ItemPedido item) {
+    if (item == null) {
+        throw new IllegalArgumentException("El item no puede ser nulo");
+    }
+    this.items.add(item);
+    this.montoTotal = this.calcularMontoTotal();
+}
+```
