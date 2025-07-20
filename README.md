@@ -206,3 +206,59 @@ Uso de clases auxiliares (Dinero, Direccion) para separar responsabilidades y fa
 
 # SonarLint
 Tras realizar las buenas practicas descritas, no se encontraron bugs, code smells ni vulnerabilidades
+
+---
+# Laboratorio 12 Principios SOLID
+
+# Buenas Practicas Aplicadas
+---
+> **1.- Principio de Responsabilidad Unica (SRP)**:Cada clase debe tener una única razón para cambiar, es decir, encargarse de una única responsabilidad.
+Ejemplo 1: ItemPedido.java: Encargado solo de representar un ítem del pedido y calcular su subtotal. No gestiona pedidos ni entregas completas.
+```java
+public Dinero calcularSubtotal() {
+    validarCantidad();
+    this.subtotal = precioUnitario.multiplicar(cantidad);
+    return this.subtotal;
+}
+```
+Ejemplo 2: Entrega.java: Se responsabiliza únicamente del estado de una entrega, su repartidor y su dirección.
+```java
+public void actualizarEstado(EstadoEntrega nuevoEstado) {
+    if (this.estado == EstadoEntrega.ENTREGADO && nuevoEstado != EstadoEntrega.INCIDENCIA) {
+        throw new IllegalStateException("No se puede cambiar el estado de una entrega ya completada");
+    }
+    this.estado = nuevoEstado;
+}
+```
+---
+> **2.- Principio Abierto/Cerrado (OCP)**: Las clases deben estar abiertas para extensión, pero cerradas para modificación.
+Ejemplo 1: Dinero y ItemPedido
+La clase Dinero encapsula la lógica monetaria. ItemPedido puede trabajar con distintos comportamientos de Dinero sin modificar su lógica.
+```java
+this.subtotal = precioUnitario.multiplicar(cantidad); // extensión sin modificar ItemPedido
+```
+Ejemplo 2: Manejo del estado en Entrega
+Permite modificar estados válidos sin cambiar la clase gracias a condiciones bien definidas:
+```java
+
+if (this.estado == EstadoEntrega.ENTREGADO && nuevoEstado != EstadoEntrega.INCIDENCIA) {
+    throw new IllegalStateException("No se puede cambiar el estado...");
+}
+``` 
+---
+> **3.- Principio de Inversión de Dependencias (DIP)**: Los módulos de alto nivel no deben depender de módulos de bajo nivel, ambos deben depender de abstracciones.
+Ejemplo 1: Uso de clase Dinero como dependencia
+ItemPedido y Pedido dependen de la abstracción Dinero, no de primitivas como double o float.
+```java
+private Dinero precioUnitario;
+private Dinero subtotal;
+```
+Ejemplo 2: Entrega depende de Direccion
+Entrega no depende de primitivas para representar una dirección (como String calle, String 
+ciudad...), sino de una clase Direccion específica.
+```java
+private Direccion direccionEntrega;
+```
+
+# SonarLint
+No se encontraron bugs, code smells ni vulnerabilidades
