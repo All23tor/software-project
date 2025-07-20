@@ -19,8 +19,13 @@ public class Entrega {
     }
 
     public void actualizarEstado(EstadoEntrega nuevoEstado) {
-        if (this.estado == EstadoEntrega.ENTREGADO && nuevoEstado != EstadoEntrega.INCIDENCIA) {
-            throw new IllegalStateException("No se puede cambiar el estado de una entrega ya completada");
+        if (this.estado == EstadoEntrega.ENTREGADO) {
+            if (nuevoEstado != EstadoEntrega.INCIDENCIA) {
+                throw new IllegalStateException("No se puede cambiar el estado de una entrega ya completada");
+            }
+        }
+        if (nuevoEstado == null) {
+            throw new IllegalArgumentException("El nuevo estado no puede ser nulo.");
         }
         if (nuevoEstado == null) {
             throw new IllegalArgumentException("El nuevo estado no puede ser nulo.");
