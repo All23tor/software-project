@@ -65,11 +65,9 @@ public class Pedido {
             @AttributeOverride(name = "codigoPostal", column = @Column(name = "direccion_codigo_postal"))
             @AttributeOverride(name = "referencia", column = @Column(name = "direccion_referencia"))
 
-    @Column(nullable = false)
     private Direccion direccionEntrega;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido", orphanRemoval = true) // Un pedido tiene muchos items, cascada completa
-    @JoinColumn(name = "pedido_id") // Clave foranea en la tabla items_pedido que apunta a este pedido
     private List<ItemPedido> items = new ArrayList<>();
     // Inicializar para evitar NullPointerException
 
