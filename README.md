@@ -44,7 +44,7 @@ Principios SOLID APLICADOS
 
     public void activarCuenta() {
         this.activo = true;
-        logger.info(() -> "Cuenta de usuario activada.")
+        logger.info(() -> "Cuenta de usuario activada.");
     }
 
     public void desactivarCuenta() {
