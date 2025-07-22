@@ -28,5 +28,55 @@ Desarrollar una aplicación móvil que conecte a consumidores con negocios local
 + Cancelar pedido `cancelar()`
 + Calcular total `calcularMontoTotal()`
 
+Principios SOLID APLICADOS
+
+
+🔹 1. S – Principio de Responsabilidad Única (SRP)
+    CLASE USUARIO
+
+        @Entity
+    @Table(name = "usuarios")
+    public class Usuario {
+    private String nombre;
+    private String email;
+    private String telefono;
+    private boolean activo;
+
+    public void activarCuenta() {
+        this.activo = true;
+        logger.info(() -> "Cuenta de usuario activada.");
+    }
+
+    public void desactivarCuenta() {
+        this.activo = false;
+        logger.info(() -> "Cuenta de usuario desactivada.");
+    }
+🔹 2. O – Principio de Abierto/Cerrado (OCP)
+    
+    @Inheritance(strategy = InheritanceType.JOINED)
+    public class Usuario {
+    ...
+    }
+    
+    // Subclase ejemplo:
+    @Entity
+    public class Cliente extends Usuario {
+    private String preferenciasEntrega;
+    }
+
+🔹 3. L – Principio de Sustitución de Liskov (LSP)
+    
+    public class Usuario {
+    public void setEmail(String email) {
+        if (email == null || !email.contains("@")) {
+            throw new IllegalArgumentException("El email es invalido.");
+        }
+        this.email = email;
+        }
+    }
+
+    // Esto funcionará igual si Cliente extiende Usuario:
+    Usuario u = new Cliente();
+    u.setEmail("ejemplo@correo.com");
 ![Prototipo](Prototipo.png)
 ![Diagrama](Diagrama.png)

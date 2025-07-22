@@ -1,5 +1,5 @@
 // file: src/main/java/org/unsa/service/interfaces/IPlatilloServicio.java
-package org.unsa.service.interfaces;
+package org.unsa.model.service.Interfaces;
 
 import org.unsa.model.domain.restaurantes.Plato;
 import org.unsa.model.domain.restaurantes.Dinero; // Necesario para crear/actualizar Plato
