@@ -1,3 +1,5 @@
+//file : src/main/java/org/unsa/model/repository/PlatoRepository.java
+
 package org.unsa.model.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -6,7 +8,6 @@ import org.unsa.model.domain.restaurantes.Plato;
 
 import java.util.List;
 
-@Repository
 public interface PlatoRepository extends JpaRepository<Plato, Integer> {
 
     // Lista todos los platos de un restaurante específico

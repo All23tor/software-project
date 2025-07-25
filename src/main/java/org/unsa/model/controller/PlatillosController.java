@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.unsa.model.domain.restaurantes.Plato;
 import org.unsa.model.dtos.CrearPlatilloRequest;
 import org.unsa.model.dtos.ActualizarPlatilloRequest;
-import org.unsa.service.interfaces.IPlatilloServicio;
+import org.unsa.model.service.Interfaces.IPlatilloServicio;
 
 import java.util.List;
 

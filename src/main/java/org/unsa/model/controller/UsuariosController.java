@@ -1,11 +1,10 @@
 // file: src/main/java/org/unsa/model/controller/UsuariosController.java
 package org.unsa.model.controller;
 
-import org.unsa.model.domain.usuarios.Usuario; // Tu entidad Usuario base
-import org.unsa.model.dtos.CrearUsuarioRequest; // DTO para crear un usuario
-import org.unsa.model.dtos.ActualizarUsuarioRequest; // DTO para actualizar un usuario
-import org.unsa.model.service.Interfaces.IUsuarioServicio; // Tu interfaz de servicio de usuario
-
+import org.unsa.model.domain.usuarios.Usuario;
+import org.unsa.model.dtos.CrearUsuarioRequest;
+import org.unsa.model.dtos.ActualizarUsuarioRequest;
+import org.unsa.model.service.Interfaces.IUsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
