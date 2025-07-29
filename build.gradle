@@ -17,6 +17,7 @@ repositories {
 	mavenCentral()
 }
 
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -28,11 +29,15 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
 	testImplementation 'org.testcontainers:junit-jupiter'
 	testImplementation 'org.testcontainers:mysql'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation 'org.slf4j:slf4j-api:2.0.12'
+	implementation 'ch.qos.logback:logback-classic:1.5.13'
 	compileOnly 'org.projectlombok:lombok:1.18.30'
 	annotationProcessor 'org.projectlombok:lombok:1.18.30'
-	implementation 'org.slf4j:slf4j-api:2.0.12'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+}
+
+springBoot {
+	mainClass = 'org.unsa.softwareproject.SoftwareProjectApplication'
 }
 
 tasks.named('test') {

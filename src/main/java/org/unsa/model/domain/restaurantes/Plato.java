@@ -49,7 +49,7 @@ public class Plato {
         if (nombre == null || nombre.trim().isEmpty()) {
             logger.warn("Intento de crear Plato con nombre nulo o vacío.");
             throw new IllegalArgumentException("El nombre del plato no puede ser nulo o vacío.");
-        }
+            }
         if (precio == null) {
             logger.warn("Intento de crear Plato con precio nulo.");
             throw new IllegalArgumentException("El precio del plato no puede ser nulo.");

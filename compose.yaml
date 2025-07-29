@@ -2,12 +2,9 @@ services:
   mysql:
     image: 'mysql:latest'
     environment:
-      - 'MYSQL_DATABASE=softwaredb'
-      - 'MYSQL_ROOT_PASSWORD=user123'
-      - 'MYSQL_PASSWORD=user123'
-      - 'MYSQL_USER=user'
-      - 'MYSQL_ROOT_HOST=%'
+      - 'MYSQL_DATABASE=SueldoMinimo'
+      - 'MYSQL_PASSWORD=squlito23'
+      - 'MYSQL_ROOT_PASSWORD=verysecret'
+      - 'MYSQL_USER=usuario_app'
     ports:
       - '3306:3306'
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
