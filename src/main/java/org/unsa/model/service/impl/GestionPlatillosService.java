@@ -1,13 +1,12 @@
 // file: src/main/java/org/unsa/service/impl/GestionPlatillosService.java
 package org.unsa.model.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.unsa.model.domain.restaurantes.Plato;
 import org.unsa.model.domain.restaurantes.Dinero;
-import org.unsa.model.domain.restaurantes.Restaurante;
 import org.unsa.model.repository.PlatoRepository;
 import org.unsa.model.repository.RestauranteRepository;
-import org.unsa.service.interfaces.IPlatilloServicio;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.unsa.model.service.Interfaces.IPlatilloServicio;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,11 +18,16 @@ public class GestionPlatillosService implements IPlatilloServicio {
 
     private static final Logger logger = LoggerFactory.getLogger(GestionPlatillosService.class);
 
-    @Autowired
-    private PlatoRepository platoRepository;
+    private final PlatoRepository platoRepository;
+
+    private final RestauranteRepository restauranteRepository;
 
     @Autowired
-    private RestauranteRepository restauranteRepository;
+    public GestionPlatillosService(PlatoRepository platoRepository, RestauranteRepository restauranteRepository) {
+        this.platoRepository = platoRepository;
+        this.restauranteRepository = restauranteRepository;
+        logger.info("Servicio de GestionPlatillosService inicializado con repositorios.");
+    }
 
     @Override
     public Plato crearPlatillo(Integer idRestaurante, String nombre, String descripcion, Dinero precio) {
