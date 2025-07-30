@@ -1,85 +1,53 @@
 <template>
-  <div class="category-carousel-wrapper">
-    <div class="category-carousel" :style="carouselStyle">
-      <div
-          class="category"
-          v-for="(cat, i) in repeatedCategories"
-          :key="i"
-          :class="{ active: cat.name === selected.name }"
-          @click="$emit('select', cat)"
-      >
-        <span class="icon">{{ cat.icon }}</span>
-        <span class="name">{{ cat.name }}</span>
-      </div>
+  <div class="carousel">
+    <button @click="prev">⬅️</button>
+
+    <div class="carousel-item">
+      <span class="icon">{{ current.icon }}</span>
+      <span class="name">{{ current.name }}</span>
     </div>
+
+    <button @click="next">➡️</button>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import {categories} from "@/data/categories.js";
-defineProps(['categories', 'selected'])
-const emit = defineEmits(['select'])
+import { ref, computed } from 'vue';
+import { categories } from '../data/categories.js';
 
-const repeatedCategories = computed(() => [...categories, ...categories])
-const animationDuration = computed(() => `${categories.length * 3}s`)
-const carouselStyle = computed(() => ({
-  animation: `scroll-left ${animationDuration.value} linear infinite`
-}))
+const index = ref(0);
+
+const current = computed(() => categories[index.value]);
+
+function next() {
+  index.value = (index.value + 1) % categories.length;
+}
+
+function prev() {
+  index.value = (index.value - 1 + categories.length) % categories.length;
+}
+
+// Exportamos el índice y categoría actual si otro componente (como MenuCard.vue) quiere usarlos
+defineExpose({ current, index });
 </script>
 
 <style scoped>
-.category-carousel-wrapper {
-  overflow: hidden;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-}
-
-.category-carousel {
-  display: inline-flex;
-  gap: 1rem;
-  white-space: nowrap;
-}
-
-.category {
-  flex: 0 0 auto;
-  background: #ffeaea;
-  padding: 0.75rem 1.5rem;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 1.2rem;
-  color: #e05656;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
-  white-space: nowrap;
-  cursor: pointer;
+.carousel {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  justify-content: center;
+  gap: 2rem;
+  font-size: 2rem;
+  margin-bottom: 2rem;
 }
 
-.category .icon {
+.carousel-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.name {
+  font-weight: bold;
   font-size: 1.5rem;
-}
-
-.category:hover {
-  background: #e05656;
-  color: white;
-  transform: translateY(-2px);
-}
-
-.category.active {
-  background: #e05656 !important;
-  color: white !important;
-  transform: scale(1.05);
-}
-
-@keyframes scroll-left {
-  from {
-    transform: translateX(0%);
-  }
-  to {
-    transform: translateX(-50%);
-  }
 }
 </style>
