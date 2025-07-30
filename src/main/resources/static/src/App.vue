@@ -1,10 +1,17 @@
-<!-- App.vue -->
 <template>
   <div class="app">
     <div class="menu-card">
       <h1>🍔 Welcome to QuickBite!</h1>
       <p class="tagline">Delicious food, delivered fast.</p>
 
+      <!-- 🔄 Carrusel de categorías -->
+      <div class="category-carousel">
+        <div class="category" v-for="cat in categories" :key="cat">
+          {{ cat }}
+        </div>
+      </div>
+
+      <!-- 🍽️ Comidas destacadas -->
       <div class="food-items">
         <div class="food" v-for="item in featured" :key="item.name">
           <img :src="item.img" :alt="item.name" />
@@ -22,6 +29,10 @@ const featured = [
   { name: "Cheeseburger", img: "https://i.imgur.com/7D7I6dI.png" },
   { name: "Sushi", img: "https://i.imgur.com/sP4Y5ZK.png" },
   { name: "Pizza", img: "https://i.imgur.com/TlW5BzI.png" },
+];
+
+const categories = [
+  "Burgers", "Sushi", "Pizza", "Tacos", "Pasta", "Salads", "Desserts", "Drinks"
 ];
 
 function startOrder() {
@@ -66,6 +77,41 @@ body {
   margin-bottom: 1.5rem;
 }
 
+/* 🔄 CARRUSEL */
+.category-carousel {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  scroll-snap-type: x mandatory;
+}
+
+.category-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.category {
+  flex: 0 0 auto;
+  background: #ffeaea;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  color: #e05656;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+  scroll-snap-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.category:hover {
+  background: #e05656;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* 🍽️ COMIDAS */
 .food-items {
   display: flex;
   justify-content: space-around;
@@ -95,6 +141,7 @@ body {
   transform: scale(1.1);
 }
 
+/* BOTÓN */
 .menu-card button {
   background: #e05656;
   color: white;
@@ -112,6 +159,7 @@ body {
   transform: translateY(-2px);
 }
 
+/* ANIMACIÓN */
 @keyframes fadeIn {
   from {
     opacity: 0;
