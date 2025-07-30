@@ -5,7 +5,6 @@
 2. [Propósito del Proyecto](#propósito-del-proyecto)
 3. [Funcionalidades](#funcionalidades)
    - [Alto Nivel (Diagrama de Casos de Uso UML)](#alto-nivel-diagrama-de-casos-de-uso-uml)
-   - [Prototipo (GUI)](#prototipo-gui)
 4. [Modelo de Dominio](#modelo-de-dominio)
    - [Diagrama de Clases](#diagrama-de-clases)
    - [Módulos](#módulos)
@@ -56,12 +55,6 @@ La aplicación SueldoMinimo ofrece las siguientes funcionalidades principales:
    - Seguimiento del estado de los pedidos
    - Asignación de repartidores
    - Cancelación de pedidos
-
-### Prototipo (GUI)
-
-A continuación se muestra el prototipo de la interfaz de usuario de la aplicación:
-
-![Prototipo](Prototipo.png)
 
 ## Modelo de Dominio
 
