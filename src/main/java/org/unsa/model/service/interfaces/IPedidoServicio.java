@@ -14,10 +14,16 @@ import java.util.List;
  */
 public interface IPedidoServicio {
     Pedido crearPedido(Integer idCliente, Integer idRestaurante, List<DatosPlatoPedido> itemsCarrito, Direccion direccionEntrega, String instruccionesEspeciales);
+
     Pedido obtenerPedidoPorId(Integer idPedido);
+
     List<Pedido> obtenerPedidosPorCliente(Integer idCliente);
+
     void actualizarEstadoPedido(Integer idPedido, EstadoPedido nuevoEstado);
+
     void asignarRepartidorAPedido(Integer idPedido, Integer idRepartidor);
+
     void cancelarPedido(Integer idPedido, Integer idUsuario);
+
     void confirmarEntrega(Integer idPedido);
 }

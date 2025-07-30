@@ -36,6 +36,7 @@ public class CatalogoRestaurantesService {
 
     /**
      * Busca restaurantes por un texto dado en su nombre, dirección o tipo de cocina.
+     *
      * @param texto El texto a buscar (puede ser nulo o vació para obtener todos).
      * @return Una lista de restaurantes que coinciden con el criterio de búsqueda.
      */
@@ -46,10 +47,7 @@ public class CatalogoRestaurantesService {
         }
 
         String textoLowerCase = texto.toLowerCase();
-        List<Restaurante> resultados = restaurantesSimulados.stream()
-                .filter(r -> r.getNombre().toLowerCase().contains(textoLowerCase) ||
-                        r.getDireccion().toLowerCase().contains(textoLowerCase) ||
-                        r.getTipoCocina().name().toLowerCase().contains(textoLowerCase)) // Compara con el nombre del enum
+        List<Restaurante> resultados = restaurantesSimulados.stream().filter(r -> r.getNombre().toLowerCase().contains(textoLowerCase) || r.getDireccion().toLowerCase().contains(textoLowerCase) || r.getTipoCocina().name().toLowerCase().contains(textoLowerCase)) // Compara con el nombre del enum
                 .toList();
 
         logger.info(() -> "Búsqueda por texto '" + texto + "' resulto en " + resultados.size() + " restaurantes.");
@@ -58,6 +56,7 @@ public class CatalogoRestaurantesService {
 
     /**
      * Obtiene una lista de todos los restaurantes disponibles en el catálogo.
+     *
      * @return Una lista de todos los objetos Restaurante.
      */
     public List<Restaurante> obtenerTodos() {

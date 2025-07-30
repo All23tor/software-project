@@ -25,7 +25,8 @@ public class Credenciales {
 
     /**
      * Constructor para la clase Credenciales.
-     * @param nombreUsuario El nombre de usuario.
+     *
+     * @param nombreUsuario  El nombre de usuario.
      * @param contrasenaHash El hash de la contraseña (nunca la contraseña en texto plano).
      * @throws IllegalArgumentException Si el nombre de usuario o el hash de contraseña son nulos o vacios.
      */
@@ -76,9 +77,7 @@ public class Credenciales {
      */
     @Override
     public String toString() {
-        return TO_STRING_PREFIX +
-                NOMBRE_USUARIO_FIELD + nombreUsuario + SINGLE_QUOTE +
-                CONTRASENA_HASH_FIELD + "[HASH_OCULTO]" + SINGLE_QUOTE + // Ocultar hash por seguridad
+        return TO_STRING_PREFIX + NOMBRE_USUARIO_FIELD + nombreUsuario + SINGLE_QUOTE + CONTRASENA_HASH_FIELD + "[HASH_OCULTO]" + SINGLE_QUOTE + // Ocultar hash por seguridad
                 TO_STRING_SUFFIX;
     }
 
@@ -86,6 +85,7 @@ public class Credenciales {
      * Compara si este objeto Credenciales es igual a otro objeto.
      * Dos objetos Credenciales se consideran iguales si tienen el mismo nombre de usuario.
      * (La comparacion de contrasena hash se haria en un servicio de autenticacion).
+     *
      * @param o El objeto a comparar.
      * @return true si los objetos son iguales, false en caso contrario.
      */
@@ -100,6 +100,7 @@ public class Credenciales {
     /**
      * Genera un codigo hash para este objeto Credenciales.
      * Es consistente con el metodo equals().
+     *
      * @return El codigo hash.
      */
     @Override

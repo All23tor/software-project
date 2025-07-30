@@ -14,6 +14,7 @@ import org.springframework.dao.DataIntegrityViolationException; // Para manejar 
 import jakarta.validation.Valid; // Para habilitar las validaciones en los Dtos (ej. @NotBlank, @Email)
 
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,6 +32,7 @@ public class UsuariosController {
 
     /**
      * Constructor del controlador que inyecta la dependencia del servicio de usuarios.
+     *
      * @param usuarioServicio La implementación del servicio de usuarios.
      */
     @Autowired
@@ -43,9 +45,10 @@ public class UsuariosController {
      * Endpoint para crear un nuevo usuario en el sistema.
      * Método HTTP: POST
      * Ruta: /usuarios
+     *
      * @param request El DTO (Data Transfer Object) {@code CrearUsuarioRequest} que contiene los datos del nuevo usuario.
-     * {@code @Valid} activa las validaciones definidas en el DTO.
-     * {@code @RequestBody} indica que los datos del usuario vienen en el cuerpo de la petición.
+     *                {@code @Valid} activa las validaciones definidas en el DTO.
+     *                {@code @RequestBody} indica que los datos del usuario vienen en el cuerpo de la petición.
      * @return {@code ResponseEntity} con el usuario creado y un estado HTTP 201 (Created) si es exitoso,
      * o un estado de error (ej. 400 Bad Request, 409 Conflict, 500 Internal Server Error).
      */
@@ -74,8 +77,9 @@ public class UsuariosController {
      * Endpoint para obtener los detalles de un usuario específico por su ID.
      * Método HTTP: GET
      * Ruta: /usuarios/{id}
+     *
      * @param id El ID (identificador único) del usuario, extraído de la ruta de la URL.
-     * {@code @PathVariable} mapea el valor de la URL a este parámetro.
+     *           {@code @PathVariable} mapea el valor de la URL a este parámetro.
      * @return {@code ResponseEntity} con el objeto {@code Usuario} y un estado HTTP 200 (OK) si se encuentra,
      * o un estado HTTP 404 (Not Found) si el usuario no existe.
      */
@@ -95,6 +99,7 @@ public class UsuariosController {
      * Endpoint para obtener una lista de todos los usuarios registrados en el sistema.
      * Método HTTP: GET
      * Ruta: /usuarios
+     *
      * @return {@code ResponseEntity} con una lista de objetos {@code Usuario} y un estado HTTP 200 (OK).
      * Si no hay usuarios, devuelve una lista vacía.
      */
@@ -109,7 +114,8 @@ public class UsuariosController {
      * Endpoint para actualizar la información de un usuario existente.
      * Método HTTP: PUT
      * Ruta: /usuarios/{id}
-     * @param id El ID del usuario a actualizar.
+     *
+     * @param id      El ID del usuario a actualizar.
      * @param request El DTO {@code ActualizarUsuarioRequest} con los datos que se desean modificar.
      * @return {@code ResponseEntity} con el usuario actualizado y un estado HTTP 200 (OK) si es exitoso,
      * o un estado de error (ej. 400 Bad Request, 404 Not Found, 409 Conflict, 500 Internal Server Error).
@@ -138,6 +144,7 @@ public class UsuariosController {
      * Endpoint para eliminar un usuario del sistema por su ID.
      * Método HTTP: DELETE
      * Ruta: /usuarios/{id}
+     *
      * @param id El ID del usuario a eliminar.
      * @return {@code ResponseEntity} con un estado HTTP 204 (No Content) si la eliminación es exitosa,
      * o un estado de error (ej. 404 Not Found, 500 Internal Server Error).

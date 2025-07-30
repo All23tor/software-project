@@ -40,11 +40,6 @@ public class CrearUsuarioRequest {
 
     @Override
     public String toString() {
-        return "CrearUsuarioRequest{" +
-                "nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", email='" + email + '\'' +
-                ", telefono='" + telefono + '\'' +
-                '}';
+        return "CrearUsuarioRequest{" + "nombre='" + nombre + '\'' + ", apellido='" + apellido + '\'' + ", email='" + email + '\'' + ", telefono='" + telefono + '\'' + '}';
     }
 }

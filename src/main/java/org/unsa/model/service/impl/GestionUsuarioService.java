@@ -85,8 +85,7 @@ public class GestionUsuarioService implements IUsuarioServicio {
     public Usuario obtenerUsuarioPorId(Integer id) {
         logger.info("Buscando usuario con ID: {}", id);
         // Usa findById que devuelve un Optional
-        return usuarioRepository.findById(id)
-                .orElse(null); // Retorna null si no lo encuentra
+        return usuarioRepository.findById(id).orElse(null); // Retorna null si no lo encuentra
     }
 
     @Override
@@ -102,8 +101,7 @@ public class GestionUsuarioService implements IUsuarioServicio {
         logger.info("Intentando actualizar usuario con ID: {}", id);
 
         // Buscar el usuario existente
-        Usuario usuarioExistente = usuarioRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado con ID: " + id));
+        Usuario usuarioExistente = usuarioRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado con ID: " + id));
 
         // Aplicar los cambios del DTO a la entidad existente
         // Solo actualiza los campos que no son nulos en el request

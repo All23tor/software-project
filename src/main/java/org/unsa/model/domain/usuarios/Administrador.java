@@ -42,14 +42,15 @@ public class Administrador extends Usuario {
 
     /**
      * Constructor para la clase Administrador.
-     * @param id Identificador unico del administrador.
-     * @param nombre Nombre completo del administrador.
-     * @param email Correo electronico del administrador.
-     * @param telefono Numero de telefono del administrador.
+     *
+     * @param id           Identificador unico del administrador.
+     * @param nombre       Nombre completo del administrador.
+     * @param email        Correo electronico del administrador.
+     * @param telefono     Numero de telefono del administrador.
      * @param departamento Departamento al que pertenece el administrador.
      */
-    public Administrador(int id, String nombre , String email, String telefono, String departamento){ // ID cambiado a int
-        super(id,nombre,email,telefono);
+    public Administrador(int id, String nombre, String email, String telefono, String departamento) { // ID cambiado a int
+        super(id, nombre, email, telefono);
         this.departamento = departamento;
         logger.info(() -> LOG_PREFIX_ADMIN + getNombre() + " creado con ID: " + getId());
     }
@@ -59,14 +60,7 @@ public class Administrador extends Usuario {
      */
     @Override
     public String toString() {
-        return TO_STRING_PREFIX +
-                "id=" + getId() + // Cambiado para int
-                ", nombre='" + getNombre() + SINGLE_QUOTE +
-                ", email='" + getEmail() + SINGLE_QUOTE +
-                ", telefono='" + getTelefono() + SINGLE_QUOTE +
-                ", fechaRegistro=" + getFechaRegistro() +
-                ", activo=" + isActivo() +
-                DEPARTAMENTO_FIELD + departamento + SINGLE_QUOTE +
-                TO_STRING_SUFFIX;
+        return TO_STRING_PREFIX + "id=" + getId() + // Cambiado para int
+                ", nombre='" + getNombre() + SINGLE_QUOTE + ", email='" + getEmail() + SINGLE_QUOTE + ", telefono='" + getTelefono() + SINGLE_QUOTE + ", fechaRegistro=" + getFechaRegistro() + ", activo=" + isActivo() + DEPARTAMENTO_FIELD + departamento + SINGLE_QUOTE + TO_STRING_SUFFIX;
     }
 }

@@ -11,8 +11,12 @@ import java.util.List;
  */
 public interface IClienteServicio {
     void registrarCliente(Cliente cliente);
+
     Cliente obtenerClientePorId(String idCliente);
+
     List<Cliente> obtenerTodosClientes();
+
     Cliente actualizarCliente(String idCliente, String nombre, String email, String telefono, String preferenciasAlimentarias);
+
     void eliminarCliente(String idCliente);
 }

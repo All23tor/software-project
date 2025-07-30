@@ -1,6 +1,7 @@
 package org.unsa.model.service.impl;
 
 import org.unsa.model.domain.usuarios.Cliente; // Importación corregida para Cliente
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,6 +24,7 @@ public class GestionClientesService {
      * Registra un nuevo cliente en el sistema.
      * En una aplicación real, esto interactuaria con un repositorio de clientes
      * para persistir el objeto Cliente en una base de datos.
+     *
      * @param cliente El objeto Cliente a registrar.
      * @throws IllegalArgumentException Si el objeto cliente es nulo.
      */

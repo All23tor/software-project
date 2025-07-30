@@ -44,11 +44,13 @@ public class ItemPedido {
     /**
      * Constructor vacío para JPA.
      */
-    public ItemPedido() {} // Necesario para JPA
+    public ItemPedido() {
+    } // Necesario para JPA
 
     /**
      * Constructor para ItemPedido.
-     * @param plato El objeto Plato asociado a este item.
+     *
+     * @param plato    El objeto Plato asociado a este item.
      * @param cantidad La cantidad de este plato en el pedido.
      * @throws IllegalArgumentException Si el plato es nulo o la cantidad es menor o igual a cero.
      */
@@ -74,8 +76,13 @@ public class ItemPedido {
     }
 
     // --- Getters ---
-    public Integer getId() { return id; } // Getter para el ID propio del ItemPedido
-    public void setId(int id) { this.id = id; } // Setter para el ID propio del ItemPedido
+    public Integer getId() {
+        return id;
+    } // Getter para el ID propio del ItemPedido
+
+    public void setId(int id) {
+        this.id = id;
+    } // Setter para el ID propio del ItemPedido
 
     public Plato getPlato() {
         return plato;
@@ -88,11 +95,20 @@ public class ItemPedido {
     public Dinero getSubtotal() {
         return subtotal;
     }
-    public Pedido getPedido() { return pedido; }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
 
     // --- Setters ---
-    public void setId(Integer id ) { this.id = id; }
-    public void setPedido(Pedido pedido) { this.pedido = pedido; }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
     public void setPlato(Plato plato) {
         if (plato == null) {
             logger.log(Level.WARNING, () -> "Intento de establecer plato nulo para ItemPedido.");
@@ -122,7 +138,6 @@ public class ItemPedido {
     }
 
 
-
     // --- Métodos Esenciales para Objetos (equals y hashCode) ---
     @Override
     public boolean equals(Object o) {
@@ -140,11 +155,6 @@ public class ItemPedido {
     // --- Método toString() ---
     @Override
     public String toString() {
-        return "ItemPedido{" +
-                "id=" + id +
-                ", plato=" + (plato != null ? plato.getNombre() : "N/A") +
-                ", cantidad=" + cantidad +
-                ", subtotal=" + subtotal +
-                '}';
+        return "ItemPedido{" + "id=" + id + ", plato=" + (plato != null ? plato.getNombre() : "N/A") + ", cantidad=" + cantidad + ", subtotal=" + subtotal + '}';
     }
 }

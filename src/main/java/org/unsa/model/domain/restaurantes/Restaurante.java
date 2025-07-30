@@ -56,10 +56,11 @@ public class Restaurante {
     /**
      * Constructor para la clase Restaurante con parametros iniciales.
      * El ID se pasa para simulacion, pero JPA lo gestionara en un entorno real.
-     * @param id Identificador unico del restaurante (int).
-     * @param nombre Nombre del restaurante.
-     * @param direccion Direccion fisica del restaurante.
-     * @param telefono Numero de telefono del restaurante.
+     *
+     * @param id         Identificador unico del restaurante (int).
+     * @param nombre     Nombre del restaurante.
+     * @param direccion  Direccion fisica del restaurante.
+     * @param telefono   Numero de telefono del restaurante.
      * @param tipoCocina Tipo de cocina que ofrece el restaurante.
      */
     public Restaurante(Integer id, String nombre, String direccion, String telefono, TipoCocina tipoCocina) { // ID cambiado a int
@@ -98,18 +99,13 @@ public class Restaurante {
      */
     @Override
     public String toString() {
-        return TO_STRING_PREFIX +
-                ID_FIELD + id +
-                NOMBRE_FIELD + nombre + SINGLE_QUOTE +
-                DIRECCION_FIELD + (direccion != null ? direccion : "N/A") + SINGLE_QUOTE +
-                TELEFONO_FIELD + (telefono != null ? telefono : "N/A") + SINGLE_QUOTE +
-                TIPO_COCINA_FIELD + tipoCocina +
-                TO_STRING_SUFFIX;
+        return TO_STRING_PREFIX + ID_FIELD + id + NOMBRE_FIELD + nombre + SINGLE_QUOTE + DIRECCION_FIELD + (direccion != null ? direccion : "N/A") + SINGLE_QUOTE + TELEFONO_FIELD + (telefono != null ? telefono : "N/A") + SINGLE_QUOTE + TIPO_COCINA_FIELD + tipoCocina + TO_STRING_SUFFIX;
     }
 
     /**
      * Compara si este objeto Restaurante es igual a otro objeto.
      * Dos objetos Restaurante se consideran iguales si tienen el mismo ID.
+     *
      * @param o El objeto a comparar.
      * @return true si los objetos son iguales, false en caso contrario.
      */
@@ -124,6 +120,7 @@ public class Restaurante {
     /**
      * Genera un codigo hash para este objeto Restaurante.
      * Es consistente con el metodo equals().
+     *
      * @return El codigo hash.
      */
     @Override

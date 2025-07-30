@@ -5,6 +5,7 @@ import jakarta.persistence.Embeddable; // Importar la anotacion Embeddable
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Transient; // Para campos no persistentes
+
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.DayOfWeek;
@@ -32,15 +33,17 @@ public class HorarioAtencion {
     /**
      * Constructor vacío para JPA.
      */
-    public HorarioAtencion() {} // Necesario para JPA
+    public HorarioAtencion() {
+    } // Necesario para JPA
 
     /**
      * Constructor para la clase HorarioAtencion.
-     * @param diaSemana Nombre del dia de la semana en español (ej. "Lunes").
+     *
+     * @param diaSemana    Nombre del dia de la semana en español (ej. "Lunes").
      * @param horaApertura Hora de apertura en formato HH:mm (ej. "09:00").
-     * @param horaCierre Hora de cierre en formato HH:mm (ej. "22:00").
+     * @param horaCierre   Hora de cierre en formato HH:mm (ej. "22:00").
      * @throws IllegalArgumentException Si algun parametro es nulo, el dia es invalido,
-     * o el formato de hora es incorrecto.
+     *                                  o el formato de hora es incorrecto.
      */
     public HorarioAtencion(String diaSemana, String horaApertura, String horaCierre) {
         if (diaSemana == null || horaApertura == null || horaCierre == null) {
@@ -83,8 +86,9 @@ public class HorarioAtencion {
 
     /**
      * Verifica si el restaurante esta abierto en una hora y dia especificos.
+     *
      * @param horaActualStr Hora actual en formato HH:mm.
-     * @param diaActualStr Nombre del dia actual en español.
+     * @param diaActualStr  Nombre del dia actual en español.
      * @return true si el restaurante esta abierto, false en caso contrario.
      */
     @Transient // Este metodo no es persistente directamente
@@ -117,6 +121,7 @@ public class HorarioAtencion {
 
     /**
      * Convierte un nombre de día en español a un objeto DayOfWeek.
+     *
      * @param dia Nombre del dia en español.
      * @return Objeto DayOfWeek correspondiente.
      * @throws IllegalArgumentException Si el nombre del dia es invalido.
@@ -124,13 +129,20 @@ public class HorarioAtencion {
     @Transient // Este metodo no es persistente directamente
     private DayOfWeek parseDia(String dia) {
         switch (dia.toLowerCase(Locale.ROOT)) {
-            case "lunes": return DayOfWeek.MONDAY;
-            case "martes": return DayOfWeek.TUESDAY;
-            case "miercoles": return DayOfWeek.WEDNESDAY;
-            case "jueves": return DayOfWeek.THURSDAY;
-            case "viernes": return DayOfWeek.FRIDAY;
-            case "sabado": return DayOfWeek.SATURDAY;
-            case "domingo": return DayOfWeek.SUNDAY;
+            case "lunes":
+                return DayOfWeek.MONDAY;
+            case "martes":
+                return DayOfWeek.TUESDAY;
+            case "miercoles":
+                return DayOfWeek.WEDNESDAY;
+            case "jueves":
+                return DayOfWeek.THURSDAY;
+            case "viernes":
+                return DayOfWeek.FRIDAY;
+            case "sabado":
+                return DayOfWeek.SATURDAY;
+            case "domingo":
+                return DayOfWeek.SUNDAY;
             default:
                 throw new IllegalArgumentException("Día inválido: " + dia);
         }
@@ -141,14 +153,13 @@ public class HorarioAtencion {
      */
     @Override
     public String toString() {
-        return diaSemana.getDisplayName(java.time.format.TextStyle.FULL, Locale.getDefault()) + ": " +
-                horaApertura.format(FORMATO_HORA) + " - " +
-                horaCierre.format(FORMATO_HORA);
+        return diaSemana.getDisplayName(java.time.format.TextStyle.FULL, Locale.getDefault()) + ": " + horaApertura.format(FORMATO_HORA) + " - " + horaCierre.format(FORMATO_HORA);
     }
 
     /**
      * Compara si este objeto HorarioAtencion es igual a otro objeto.
      * Dos objetos HorarioAtencion se consideran iguales si tienen el mismo dia, hora de apertura y hora de cierre.
+     *
      * @param o El objeto a comparar.
      * @return true si los objetos son iguales, false en caso contrario.
      */
@@ -157,14 +168,13 @@ public class HorarioAtencion {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         HorarioAtencion that = (HorarioAtencion) o;
-        return diaSemana == that.diaSemana &&
-                Objects.equals(horaApertura, that.horaApertura) &&
-                Objects.equals(horaCierre, that.horaCierre);
+        return diaSemana == that.diaSemana && Objects.equals(horaApertura, that.horaApertura) && Objects.equals(horaCierre, that.horaCierre);
     }
 
     /**
      * Genera un codigo hash para este objeto HorarioAtencion.
      * Es consistente con el metodo equals().
+     *
      * @return El codigo hash.
      */
     @Override

@@ -45,11 +45,7 @@ public class GestionPedidosService implements IPedidoServicio {
      * Inicializa el PedidoManager.
      */
     @Autowired
-    public GestionPedidosService(PedidoRepository pedidoRepository,
-                                 RepartidorRepository repartidorRepository,
-                                 ClienteRepository clienteRepository,
-                                 RestauranteRepository restauranteRepository,
-                                 PlatoRepository platoRepository) {
+    public GestionPedidosService(PedidoRepository pedidoRepository, RepartidorRepository repartidorRepository, ClienteRepository clienteRepository, RestauranteRepository restauranteRepository, PlatoRepository platoRepository) {
         this.pedidoRepository = pedidoRepository;
         this.repartidorRepository = repartidorRepository;
         this.clienteRepository = clienteRepository;
@@ -71,19 +67,12 @@ public class GestionPedidosService implements IPedidoServicio {
      */
     @Override
     @Transactional // Esto es muy importante para métodos que modifican la DB
-    public Pedido crearPedido(
-            Integer idCliente,
-            Integer idRestaurante,
-            List<DatosPlatoPedido> itemsCarrito,
-            Direccion direccionEntrega,
-            String instruccionesEspeciales) {
+    public Pedido crearPedido(Integer idCliente, Integer idRestaurante, List<DatosPlatoPedido> itemsCarrito, Direccion direccionEntrega, String instruccionesEspeciales) {
 
         logger.info("Solicitud para crear un nuevo pedido para cliente {} en restaurante {}", idCliente, idRestaurante);
 
-        Cliente cliente = clienteRepository.findById(idCliente)
-                .orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado con ID: " + idCliente));
-        Restaurante restaurante = restauranteRepository.findById(idRestaurante)
-                .orElseThrow(() -> new IllegalArgumentException("Restaurante no encontrado con ID: " + idRestaurante));
+        Cliente cliente = clienteRepository.findById(idCliente).orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado con ID: " + idCliente));
+        Restaurante restaurante = restauranteRepository.findById(idRestaurante).orElseThrow(() -> new IllegalArgumentException("Restaurante no encontrado con ID: " + idRestaurante));
 
         Pedido nuevoPedido = new Pedido();
         nuevoPedido.setCliente(cliente);
@@ -93,8 +82,7 @@ public class GestionPedidosService implements IPedidoServicio {
         nuevoPedido.setEstado(EstadoPedido.PENDIENTE);
 
         for (DatosPlatoPedido itemDto : itemsCarrito) {
-            Plato plato = platoRepository.findById(itemDto.getIdPlato())
-                    .orElseThrow(() -> new IllegalArgumentException("Plato no encontrado con ID: " + itemDto.getIdPlato()));
+            Plato plato = platoRepository.findById(itemDto.getIdPlato()).orElseThrow(() -> new IllegalArgumentException("Plato no encontrado con ID: " + itemDto.getIdPlato()));
 
             ItemPedido item = new ItemPedido();
             item.setPlato(plato);
@@ -118,13 +106,12 @@ public class GestionPedidosService implements IPedidoServicio {
     }
 
     private static final String PEDIDO_ID = "Pdido con ID ";
-    
+
     @Override
     @Transactional
     public void actualizarEstadoPedido(Integer idPedido, EstadoPedido nuevoEstado) {
         logger.info("Actualizando estado del pedido {} a: {}", idPedido, nuevoEstado);
-        Pedido pedido = pedidoRepository.findById(idPedido)
-                .orElseThrow(() -> new IllegalArgumentException(PEDIDO_ID + idPedido + " no encontrado."));
+        Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow(() -> new IllegalArgumentException(PEDIDO_ID + idPedido + " no encontrado."));
         pedido.actualizarEstado(nuevoEstado); // Asume que este método en Pedido valida la transición
         pedidoRepository.save(pedido); // Guarda los cambios
         logger.info("Estado de pedido {} actualizado a {} .", idPedido, nuevoEstado);
@@ -155,8 +142,7 @@ public class GestionPedidosService implements IPedidoServicio {
     @Transactional
     public void cancelarPedido(Integer idPedido, Integer idUsuario) {
         logger.info("Cancelando pedido {} por usuario {}", idPedido, idUsuario);
-        Pedido pedido = pedidoRepository.findById(idPedido)
-                .orElseThrow(() -> new IllegalArgumentException(PEDIDO_ID + idPedido + " no encontrado para cancelar."));
+        Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow(() -> new IllegalArgumentException(PEDIDO_ID + idPedido + " no encontrado para cancelar."));
         if (pedido.getCliente() == null) {
             throw new IllegalStateException("El pedido con ID " + idPedido + " no tiene un cliente asociado.");
         }
@@ -172,8 +158,7 @@ public class GestionPedidosService implements IPedidoServicio {
     @Transactional
     public void confirmarEntrega(Integer idPedido) {
         logger.info("Confirmando entrega del pedido {}", idPedido);
-        Pedido pedido = pedidoRepository.findById(idPedido)
-                .orElseThrow(() -> new IllegalArgumentException(PEDIDO_ID + idPedido + " no encontrado para confirmar entrega."));
+        Pedido pedido = pedidoRepository.findById(idPedido).orElseThrow(() -> new IllegalArgumentException(PEDIDO_ID + idPedido + " no encontrado para confirmar entrega."));
         pedido.actualizarEstado(EstadoPedido.ENTREGADO); // Asume que este método en Pedido actualiza a ENTREGADO
         pedidoRepository.save(pedido);
         logger.info("Pedido {} confirmado como ENTREGADO.", idPedido);

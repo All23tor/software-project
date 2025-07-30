@@ -24,14 +24,8 @@ public class PlatillosController {
 
     // Crear un nuevo platillo
     @PostMapping
-    public ResponseEntity<Plato> crearPlatillo(
-            @PathVariable Integer idRestaurante,
-            @RequestBody CrearPlatilloRequest request) {
-        Plato nuevo = platilloServicio.crearPlatillo(
-                idRestaurante,
-                request.getNombre(),
-                request.getDescripcion(),
-                request.getPrecio());
+    public ResponseEntity<Plato> crearPlatillo(@PathVariable Integer idRestaurante, @RequestBody CrearPlatilloRequest request) {
+        Plato nuevo = platilloServicio.crearPlatillo(idRestaurante, request.getNombre(), request.getDescripcion(), request.getPrecio());
         return ResponseEntity.ok(nuevo);
     }
 
@@ -49,15 +43,8 @@ public class PlatillosController {
 
     // Actualizar platillo
     @PutMapping("/{idPlatillo}")
-    public ResponseEntity<Plato> actualizarPlatillo(
-            @PathVariable Integer idPlatillo,
-            @RequestBody ActualizarPlatilloRequest request) {
-        Plato actualizado = platilloServicio.actualizarPlatillo(
-                idPlatillo,
-                request.getNombre(),
-                request.getDescripcion(),
-                request.getPrecio(),
-                request.isDisponible());
+    public ResponseEntity<Plato> actualizarPlatillo(@PathVariable Integer idPlatillo, @RequestBody ActualizarPlatilloRequest request) {
+        Plato actualizado = platilloServicio.actualizarPlatillo(idPlatillo, request.getNombre(), request.getDescripcion(), request.getPrecio(), request.isDisponible());
         return ResponseEntity.ok(actualizado);
     }
 
@@ -70,9 +57,7 @@ public class PlatillosController {
 
     // Marcar platillo como disponible o no disponible
     @PatchMapping("/{idPlatillo}/disponible")
-    public ResponseEntity<Void> marcarDisponible(
-            @PathVariable Integer idPlatillo,
-            @RequestParam boolean disponible) {
+    public ResponseEntity<Void> marcarDisponible(@PathVariable Integer idPlatillo, @RequestParam boolean disponible) {
         platilloServicio.marcarPlatilloComoDisponible(idPlatillo, disponible);
         return ResponseEntity.ok().build();
     }

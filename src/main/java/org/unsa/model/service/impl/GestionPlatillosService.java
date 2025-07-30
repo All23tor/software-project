@@ -31,11 +31,10 @@ public class GestionPlatillosService implements IPlatilloServicio {
 
     @Override
     public Plato crearPlatillo(Integer idRestaurante, String nombre, String descripcion, Dinero precio) {
-        var restaurante = restauranteRepository.findById(idRestaurante)
-                .orElseThrow(() -> {
-                    logger.warn("Restaurante con ID {} no encontrado", idRestaurante);
-                    return new IllegalArgumentException("Restaurante no encontrado");
-                });
+        var restaurante = restauranteRepository.findById(idRestaurante).orElseThrow(() -> {
+            logger.warn("Restaurante con ID {} no encontrado", idRestaurante);
+            return new IllegalArgumentException("Restaurante no encontrado");
+        });
 
         var plato = new Plato(0, nombre, descripcion, true, precio);
         plato.setRestaurante(restaurante);
@@ -56,20 +55,18 @@ public class GestionPlatillosService implements IPlatilloServicio {
 
     @Override
     public Plato verDetallePlatillo(Integer idPlatillo) {
-        return platoRepository.findById(idPlatillo)
-                .orElseThrow(() -> {
-                    logger.warn("Platillo con ID {} no encontrado", idPlatillo);
-                    return new IllegalArgumentException(NO_ENCONTRADO);
-                });
+        return platoRepository.findById(idPlatillo).orElseThrow(() -> {
+            logger.warn("Platillo con ID {} no encontrado", idPlatillo);
+            return new IllegalArgumentException(NO_ENCONTRADO);
+        });
     }
 
     @Override
     public Plato actualizarPlatillo(Integer idPlatillo, String nombre, String descripcion, Dinero precio, boolean disponible) {
-        var plato = platoRepository.findById(idPlatillo)
-                .orElseThrow(() -> {
-                    logger.warn("Platillo con ID {} no encontrado", idPlatillo);
-                    return new IllegalArgumentException(NO_ENCONTRADO);
-                });
+        var plato = platoRepository.findById(idPlatillo).orElseThrow(() -> {
+            logger.warn("Platillo con ID {} no encontrado", idPlatillo);
+            return new IllegalArgumentException(NO_ENCONTRADO);
+        });
 
         plato.setNombre(nombre);
         plato.setDescripcion(descripcion);
@@ -94,11 +91,10 @@ public class GestionPlatillosService implements IPlatilloServicio {
 
     @Override
     public void marcarPlatilloComoDisponible(Integer idPlatillo, boolean disponible) {
-        var plato = platoRepository.findById(idPlatillo)
-                .orElseThrow(() -> {
-                    logger.warn("Platillo con ID {} no encontrado al marcar disponibilidad", idPlatillo);
-                    return new IllegalArgumentException(NO_ENCONTRADO);
-                });
+        var plato = platoRepository.findById(idPlatillo).orElseThrow(() -> {
+            logger.warn("Platillo con ID {} no encontrado al marcar disponibilidad", idPlatillo);
+            return new IllegalArgumentException(NO_ENCONTRADO);
+        });
 
         plato.setDisponible(disponible);
         platoRepository.save(plato);

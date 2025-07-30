@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import lombok.*;
 
 /**
@@ -54,20 +55,20 @@ public class Pedido {
     private Dinero montoTotal;
 
 
-
     private String instruccionesEspeciales;
 
     @Embedded // Incrusta el objeto Direccion
 
-            @AttributeOverride(name = "calle", column = @Column(name = "direccion_calle"))
-            @AttributeOverride(name = "numero", column = @Column(name = "direccion_numero"))
-            @AttributeOverride(name = "ciudad", column = @Column(name = "direccion_ciudad"))
-            @AttributeOverride(name = "codigoPostal", column = @Column(name = "direccion_codigo_postal"))
-            @AttributeOverride(name = "referencia", column = @Column(name = "direccion_referencia"))
+    @AttributeOverride(name = "calle", column = @Column(name = "direccion_calle"))
+    @AttributeOverride(name = "numero", column = @Column(name = "direccion_numero"))
+    @AttributeOverride(name = "ciudad", column = @Column(name = "direccion_ciudad"))
+    @AttributeOverride(name = "codigoPostal", column = @Column(name = "direccion_codigo_postal"))
+    @AttributeOverride(name = "referencia", column = @Column(name = "direccion_referencia"))
 
     private Direccion direccionEntrega;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido", orphanRemoval = true) // Un pedido tiene muchos items, cascada completa
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido", orphanRemoval = true)
+    // Un pedido tiene muchos items, cascada completa
     private List<ItemPedido> items = new ArrayList<>();
     // Inicializar para evitar NullPointerException
 
@@ -103,11 +104,12 @@ public class Pedido {
     /**
      * Constructor completo para la clase Pedido.
      * Los IDs de Cliente, Repartidor y Restaurante se reemplazan por los objetos reales.
-     * @param idPedido Identificador unico del pedido (int).
-     * @param cliente Cliente que realiza el pedido.
-     * @param restaurante Restaurante del pedido.
-     * @param direccionEntrega Direccion de entrega del pedido.
-     * @param items Lista de items del pedido.
+     *
+     * @param idPedido                Identificador unico del pedido (int).
+     * @param cliente                 Cliente que realiza el pedido.
+     * @param restaurante             Restaurante del pedido.
+     * @param direccionEntrega        Direccion de entrega del pedido.
+     * @param items                   Lista de items del pedido.
      * @param instruccionesEspeciales Instrucciones adicionales para el pedido (puede ser nulo).
      */
     public Pedido(Integer idPedido, Cliente cliente, Restaurante restaurante, Direccion direccionEntrega, List<ItemPedido> items, String instruccionesEspeciales) { // ID cambiado a int
@@ -119,7 +121,8 @@ public class Pedido {
         if (cliente == null) throw new IllegalArgumentException("El cliente no puede ser nulo.");
         if (restaurante == null) throw new IllegalArgumentException("El restaurante no puede ser nulo.");
         if (direccionEntrega == null) throw new IllegalArgumentException("La direccion de entrega no puede ser nula.");
-        if (items == null || items.isEmpty()) throw new IllegalArgumentException("La lista de items no puede ser nula o vacia.");
+        if (items == null || items.isEmpty())
+            throw new IllegalArgumentException("La lista de items no puede ser nula o vacia.");
 
         this.cliente = cliente;
         this.restaurante = restaurante;
@@ -141,6 +144,7 @@ public class Pedido {
 
     /**
      * Calcula el monto total del pedido sumando los subtotales de todos los items.
+     *
      * @return El monto total del pedido.
      */
     @Transient // Este metodo no es persistente directamente
@@ -163,6 +167,7 @@ public class Pedido {
 
     /**
      * Actualiza el estado del pedido.
+     *
      * @param nuevoEstado El nuevo estado del pedido.
      */
     @Transient // Este metodo no es persistente directamente
@@ -187,18 +192,7 @@ public class Pedido {
     // --- Método toString() ---
     @Override
     public String toString() {
-        return TO_STRING_PREFIX +
-                ID_FIELD + idPedido +
-                CLIENTE_FIELD + (cliente != null ? cliente.getId() : "N/A") +
-                REPARTIDOR_FIELD + (repartidor != null ? repartidor.getId() : "N/A") +
-                RESTAURANTE_FIELD + (restaurante != null ? restaurante.getId() : "N/A") +
-                FECHA_HORA_CREACION_FIELD + fechaHoraCreacion +
-                ESTADO_FIELD + estado +
-                MONTO_TOTAL_FIELD + montoTotal +
-                INSTRUCCIONES_ESPECIALES_FIELD + (instruccionesEspeciales != null ? instruccionesEspeciales : "N/A") + SINGLE_QUOTE +
-                DIRECCION_ENTREGA_FIELD + direccionEntrega +
-                ITEMS_FIELD + items +
-                TO_STRING_SUFFIX;
+        return TO_STRING_PREFIX + ID_FIELD + idPedido + CLIENTE_FIELD + (cliente != null ? cliente.getId() : "N/A") + REPARTIDOR_FIELD + (repartidor != null ? repartidor.getId() : "N/A") + RESTAURANTE_FIELD + (restaurante != null ? restaurante.getId() : "N/A") + FECHA_HORA_CREACION_FIELD + fechaHoraCreacion + ESTADO_FIELD + estado + MONTO_TOTAL_FIELD + montoTotal + INSTRUCCIONES_ESPECIALES_FIELD + (instruccionesEspeciales != null ? instruccionesEspeciales : "N/A") + SINGLE_QUOTE + DIRECCION_ENTREGA_FIELD + direccionEntrega + ITEMS_FIELD + items + TO_STRING_SUFFIX;
     }
 
     public Integer getIdPedido() {

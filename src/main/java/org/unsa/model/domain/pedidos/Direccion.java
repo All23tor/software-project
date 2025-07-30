@@ -15,10 +15,6 @@ public class Direccion {
     private String coordenadas;
 
     public boolean esValida() {
-        return calle != null && !calle.isEmpty()
-                && numero > 0
-                && ciudad != null
-                && distrito != null
-                && coordenadas != null;
+        return calle != null && !calle.isEmpty() && numero > 0 && ciudad != null && distrito != null && coordenadas != null;
     }
 }

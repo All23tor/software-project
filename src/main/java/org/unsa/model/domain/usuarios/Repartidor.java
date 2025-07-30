@@ -5,6 +5,7 @@ import jakarta.persistence.Entity; // Importar la anotacion Entity
 import jakarta.persistence.PrimaryKeyJoinColumn; // Para herencia JOINED
 import jakarta.persistence.Transient; // Para campos no persistentes
 import lombok.*;
+
 import java.util.logging.Logger;
 
 /**
@@ -40,11 +41,12 @@ public class Repartidor extends Usuario {
 
     /**
      * Constructor para la clase Repartidor.
-     * @param idRepartidor Identificador unico del repartidor (int).
-     * @param nombre Nombre completo del repartidor.
-     * @param email Correo electronico del repartidor.
-     * @param telefono Numero de telefono del repartidor.
-     * @param tipoVehiculo Tipo de vehiculo que utiliza el repartidor.
+     *
+     * @param idRepartidor           Identificador unico del repartidor (int).
+     * @param nombre                 Nombre completo del repartidor.
+     * @param email                  Correo electronico del repartidor.
+     * @param telefono               Numero de telefono del repartidor.
+     * @param tipoVehiculo           Tipo de vehiculo que utiliza el repartidor.
      * @param disponibleParaEntregas Estado de disponibilidad para nuevas entregas.
      */
     public Repartidor(Integer idRepartidor, String nombre, String email, String telefono, String tipoVehiculo, boolean disponibleParaEntregas) { // ID cambiado a int
@@ -69,15 +71,7 @@ public class Repartidor extends Usuario {
      */
     @Override
     public String toString() {
-        return TO_STRING_PREFIX +
-                "id=" + getId() + // Cambiado para int
-                ", nombre='" + getNombre() + SINGLE_QUOTE +
-                ", email='" + getEmail() + SINGLE_QUOTE +
-                ", telefono='" + getTelefono() + SINGLE_QUOTE +
-                ", fechaRegistro=" + getFechaRegistro() +
-                ", activo=" + isActivo() +
-                TIPO_VEHICULO_FIELD + (tipoVehiculo != null ? tipoVehiculo : "N/A") + SINGLE_QUOTE +
-                DISPONIBLE_FIELD + disponibleParaEntregas +
-                TO_STRING_SUFFIX;
+        return TO_STRING_PREFIX + "id=" + getId() + // Cambiado para int
+                ", nombre='" + getNombre() + SINGLE_QUOTE + ", email='" + getEmail() + SINGLE_QUOTE + ", telefono='" + getTelefono() + SINGLE_QUOTE + ", fechaRegistro=" + getFechaRegistro() + ", activo=" + isActivo() + TIPO_VEHICULO_FIELD + (tipoVehiculo != null ? tipoVehiculo : "N/A") + SINGLE_QUOTE + DISPONIBLE_FIELD + disponibleParaEntregas + TO_STRING_SUFFIX;
     }
 }

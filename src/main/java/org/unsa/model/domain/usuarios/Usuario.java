@@ -2,10 +2,12 @@
 package org.unsa.model.domain.usuarios;
 
 import jakarta.persistence.*; // Importar todas las anotaciones de JPA
+
 import java.util.Date;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import lombok.Getter;
 import lombok.Setter;
 import jakarta.persistence.Embedded;
@@ -55,7 +57,7 @@ public class Usuario {
      * Constructor vacío para la clase Usuario.
      * Es necesario para JPA.
      */
-    public Usuario(){
+    public Usuario() {
         this.fechaRegistro = new Date();
         this.activo = true;
         // No generamos ID aqui, JPA lo hara.
@@ -65,9 +67,10 @@ public class Usuario {
     /**
      * Constructor para la clase Usuario con parametros iniciales.
      * El ID se pasa para simulacion, pero JPA lo gestionara en un entorno real.
-     * @param id Identificador unico del usuario.
-     * @param nombre Nombre completo del usuario.
-     * @param email Correo electronico del usuario.
+     *
+     * @param id       Identificador unico del usuario.
+     * @param nombre   Nombre completo del usuario.
+     * @param email    Correo electronico del usuario.
      * @param telefono Numero de telefono del usuario.
      */
     public Usuario(Integer id, String nombre, String email, String telefono) { // ID cambiado a int
@@ -104,6 +107,7 @@ public class Usuario {
     /**
      * Establece el correo electronico del usuario.
      * Demuestra Error/Exception Handling con validacion.
+     *
      * @param email Nuevo correo electronico.
      * @throws IllegalArgumentException Si el email es nulo o no contiene '@'.
      */
@@ -122,7 +126,8 @@ public class Usuario {
 
     /**
      * Actualiza los datos de contacto (email y telefono) del usuario.
-     * @param email Nuevo correo electronico.
+     *
+     * @param email    Nuevo correo electronico.
      * @param telefono Nuevo numero de telefono.
      */
     public void actualizarDatosContacto(String email, String telefono) {
@@ -156,19 +161,13 @@ public class Usuario {
      */
     @Override
     public String toString() {
-        return TO_STRING_PREFIX +
-                ID_FIELD + id +
-                NOMBRE_FIELD + nombre + SINGLE_QUOTE +
-                EMAIL_FIELD + email + SINGLE_QUOTE +
-                TELEFONO_FIELD + telefono + SINGLE_QUOTE +
-                FECHA_REGISTRO_FIELD + fechaRegistro +
-                ACTIVO_FIELD + activo +
-                TO_STRING_SUFFIX;
+        return TO_STRING_PREFIX + ID_FIELD + id + NOMBRE_FIELD + nombre + SINGLE_QUOTE + EMAIL_FIELD + email + SINGLE_QUOTE + TELEFONO_FIELD + telefono + SINGLE_QUOTE + FECHA_REGISTRO_FIELD + fechaRegistro + ACTIVO_FIELD + activo + TO_STRING_SUFFIX;
     }
 
     /**
      * Compara si este objeto Usuario es igual a otro objeto.
      * Dos objetos Usuario se consideran iguales si tienen el mismo ID.
+     *
      * @param o El objeto a comparar.
      * @return true si los objetos son iguales, false en caso contrario.
      */
@@ -183,6 +182,7 @@ public class Usuario {
     /**
      * Genera un codigo hash para este objeto Usuario.
      * Es consistente con el metodo equals().
+     *
      * @return El codigo hash.
      */
     @Override

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 import org.unsa.model.domain.usuarios.Administrador; // Asegúrate de que esta ruta sea correcta
 
 @Repository
-public interface AdministradorRepository extends JpaRepository<Administrador, Integer> {}
+public interface AdministradorRepository extends JpaRepository<Administrador, Integer> {
+}

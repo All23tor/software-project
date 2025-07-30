@@ -12,7 +12,8 @@ public class Dinero {
     private double valor;
     private String moneda;
 
-    public Dinero() {}
+    public Dinero() {
+    }
 
     public Dinero(double valor, String moneda) {
         this.valor = valor;

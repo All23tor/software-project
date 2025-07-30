@@ -1,5 +1,5 @@
-
 package org.unsa.model.domain.usuarios;
+
 import jakarta.persistence.Embeddable;
 import lombok.*;
 

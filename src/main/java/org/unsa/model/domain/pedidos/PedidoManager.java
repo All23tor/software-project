@@ -27,21 +27,19 @@ public class PedidoManager implements IPedidoServicio {
     private final RepartidorRepository repartidorRepository;
 
     public Pedido crearNuevoPedido(Integer idCliente, Integer idRestaurante, Direccion direccionEntrega, String instruccionesEspeciales) {
-            Cliente cliente = clienteRepository.findById(idCliente)
-                    .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + idCliente));
-            Restaurante restaurante = restauranteRepository.findById(idRestaurante)
-                    .orElseThrow(() -> new RuntimeException("Restaurante no encontrado con ID: " + idRestaurante));
+        Cliente cliente = clienteRepository.findById(idCliente).orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + idCliente));
+        Restaurante restaurante = restauranteRepository.findById(idRestaurante).orElseThrow(() -> new RuntimeException("Restaurante no encontrado con ID: " + idRestaurante));
 
-            Pedido pedido = new Pedido();
-            pedido.setCliente(cliente);
-            pedido.setRestaurante(restaurante);
-            pedido.setDireccionEntrega(direccionEntrega);
-            pedido.setInstruccionesEspeciales(instruccionesEspeciales);
-            pedido.setEstado(EstadoPedido.PENDIENTE);
+        Pedido pedido = new Pedido();
+        pedido.setCliente(cliente);
+        pedido.setRestaurante(restaurante);
+        pedido.setDireccionEntrega(direccionEntrega);
+        pedido.setInstruccionesEspeciales(instruccionesEspeciales);
+        pedido.setEstado(EstadoPedido.PENDIENTE);
 
-            Pedido pedidoGuardado = pedidoRepository.save(pedido);
-            logger.info("Pedido creado exitosamente con ID: " + pedidoGuardado.getIdPedido());
-            return pedidoGuardado;
+        Pedido pedidoGuardado = pedidoRepository.save(pedido);
+        logger.info("Pedido creado exitosamente con ID: " + pedidoGuardado.getIdPedido());
+        return pedidoGuardado;
     }
 
     @Override
@@ -51,8 +49,7 @@ public class PedidoManager implements IPedidoServicio {
 
     @Override
     public Pedido obtenerPedidoPorId(Integer idPedido) {
-        return pedidoRepository.findById(idPedido)
-                .orElseThrow(() -> new RuntimeException("Pedido no encontrado con ID: " + idPedido));
+        return pedidoRepository.findById(idPedido).orElseThrow(() -> new RuntimeException("Pedido no encontrado con ID: " + idPedido));
     }
 
     @Override
@@ -70,8 +67,7 @@ public class PedidoManager implements IPedidoServicio {
     @Override
     public void asignarRepartidorAPedido(Integer idPedido, Integer idRepartidor) {
         Pedido pedido = obtenerPedidoPorId(idPedido);
-        Repartidor repartidor = repartidorRepository.findById(idRepartidor)
-                .orElseThrow(() -> new RuntimeException("Repartidor no encontrado con ID: " + idRepartidor));
+        Repartidor repartidor = repartidorRepository.findById(idRepartidor).orElseThrow(() -> new RuntimeException("Repartidor no encontrado con ID: " + idRepartidor));
         pedido.setRepartidor(repartidor);
         pedido.setEstado(EstadoPedido.EN_CAMINO);
         pedidoRepository.save(pedido);

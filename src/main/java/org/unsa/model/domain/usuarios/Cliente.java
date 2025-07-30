@@ -6,6 +6,7 @@ import jakarta.persistence.PrimaryKeyJoinColumn; // Para herencia JOINED
 import jakarta.persistence.Transient; // Para campos no persistentes
 
 import java.util.logging.Logger;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,6 +29,7 @@ public class Cliente extends Usuario {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "direccion_id", referencedColumnName = "id")
     private Direccion direccionPrincipal;
+
     /**
      * Constructor vacío para JPA.
      */
@@ -37,10 +39,11 @@ public class Cliente extends Usuario {
 
     /**
      * Constructor para la clase Cliente.
-     * @param id Identificador unico del cliente (int).
-     * @param nombre Nombre completo del cliente.
-     * @param email Correo electronico del cliente.
-     * @param telefono Numero de telefono del cliente.
+     *
+     * @param id                       Identificador unico del cliente (int).
+     * @param nombre                   Nombre completo del cliente.
+     * @param email                    Correo electronico del cliente.
+     * @param telefono                 Numero de telefono del cliente.
      * @param preferenciasAlimentarias Preferencias dieteticas o alimentarias del cliente (puede ser nulo).
      */
     public Cliente(Integer id, String nombre, String email, String telefono, String preferenciasAlimentarias) { // ID cambiado a int
@@ -64,14 +67,7 @@ public class Cliente extends Usuario {
      */
     @Override
     public String toString() {
-        return "Cliente{" +
-                "id=" + getId() + // Cambiado para int
-                ", nombre='" + getNombre() + '\'' +
-                ", email='" + getEmail() + '\'' +
-                ", telefono='" + getTelefono() + '\'' +
-                ", fechaRegistro=" + getFechaRegistro() +
-                ", activo=" + isActivo() +
-                ", preferenciasAlimentarias='" + (preferenciasAlimentarias != null ? preferenciasAlimentarias : "N/A") + '\'' +
-                '}';
+        return "Cliente{" + "id=" + getId() + // Cambiado para int
+                ", nombre='" + getNombre() + '\'' + ", email='" + getEmail() + '\'' + ", telefono='" + getTelefono() + '\'' + ", fechaRegistro=" + getFechaRegistro() + ", activo=" + isActivo() + ", preferenciasAlimentarias='" + (preferenciasAlimentarias != null ? preferenciasAlimentarias : "N/A") + '\'' + '}';
     }
 }

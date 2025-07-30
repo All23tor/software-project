@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Objects;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +50,7 @@ public class Plato {
         if (nombre == null || nombre.trim().isEmpty()) {
             logger.warn("Intento de crear Plato con nombre nulo o vacío.");
             throw new IllegalArgumentException("El nombre del plato no puede ser nulo o vacío.");
-            }
+        }
         if (precio == null) {
             logger.warn("Intento de crear Plato con precio nulo.");
             throw new IllegalArgumentException("El precio del plato no puede ser nulo.");
@@ -73,7 +74,7 @@ public class Plato {
         this.descripcion = descripcion;
         this.precio = precio;
         this.disponible = true;
-        logger.info("Plato creado asociado a restaurante: {}",restaurante.getNombre());
+        logger.info("Plato creado asociado a restaurante: {}", restaurante.getNombre());
     }
 
     public Integer getId() {
@@ -96,19 +97,12 @@ public class Plato {
     public void actualizarPrecio(Dinero nuevoPrecio) {
         if (nuevoPrecio == null) throw new IllegalArgumentException("El nuevo precio no puede ser nulo.");
         this.precio = nuevoPrecio;
-        logger.info("Precio actualizado:  {}  {}",nuevoPrecio.getValor(),nuevoPrecio.getMoneda());
+        logger.info("Precio actualizado:  {}  {}", nuevoPrecio.getValor(), nuevoPrecio.getMoneda());
     }
 
     @Override
     public String toString() {
-        return "Plato{" +
-                "idPlato=" + idPlato +
-                ", nombre='" + nombre + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", disponible=" + disponible +
-                ", precio=" + (precio != null ? precio.getValor() + " " + precio.getMoneda() : "N/A") +
-                ", restaurante=" + (restaurante != null ? restaurante.getNombre() : "N/A") +
-                '}';
+        return "Plato{" + "idPlato=" + idPlato + ", nombre='" + nombre + '\'' + ", descripcion='" + descripcion + '\'' + ", disponible=" + disponible + ", precio=" + (precio != null ? precio.getValor() + " " + precio.getMoneda() : "N/A") + ", restaurante=" + (restaurante != null ? restaurante.getNombre() : "N/A") + '}';
     }
 
     @Override

@@ -20,7 +20,8 @@ public class DatosPlatoPedido {
 
     /**
      * Constructor para DatosPlatoPedido.
-     * @param idPlato ID del plato.
+     *
+     * @param idPlato  ID del plato.
      * @param cantidad Cantidad del plato.
      * @throws IllegalArgumentException Si el ID del plato es nulo/vacío o la cantidad es <= 0.
      */
@@ -40,9 +41,6 @@ public class DatosPlatoPedido {
 
     @Override
     public String toString() {
-        return "DatosPlatoPedido{" +
-                "idPlato='" + idPlato + '\'' +
-                ", cantidad=" + cantidad +
-                '}';
+        return "DatosPlatoPedido{" + "idPlato='" + idPlato + '\'' + ", cantidad=" + cantidad + '}';
     }
 }

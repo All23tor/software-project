@@ -26,12 +26,6 @@ public class ActualizarUsuarioRequest {
 
     @Override
     public String toString() {
-        return "ActualizarUsuarioRequest{" +
-                "nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", email='" + email + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", activo=" + activo +
-                '}';
+        return "ActualizarUsuarioRequest{" + "nombre='" + nombre + '\'' + ", apellido='" + apellido + '\'' + ", email='" + email + '\'' + ", telefono='" + telefono + '\'' + ", activo=" + activo + '}';
     }
 }
