@@ -662,8 +662,7 @@ public class Usuario {
 ### Principios SOLID
 
 #### 1. Principio de Responsabilidad Única (SRP)
-Cada clase tiene una única responsabilidad. Por ejemplo, la clase Usuario maneja solo la información y comportamiento relacionado con los usuarios.
-
+Cada clase tiene una única responsabilidad.
 ```java
 public class PedidoManager implements IPedidoServicio {
     private final PedidoRepository pedidoRepository;
