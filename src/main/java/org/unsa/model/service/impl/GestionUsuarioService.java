@@ -65,8 +65,6 @@ public class GestionUsuarioService implements IUsuarioServicio {
         nuevoCliente.setDireccionPrincipal(request.getDireccionPrincipal()); // Asumo que Direccion es @Embedded en Usuario/Cliente
 
         // Establecer valores por defecto para Usuario (si no se hacen en el constructor)
-        // nuevoCliente.setFechaRegistro(new Date());
-        // nuevoCliente.setActivo(true);
 
         try {
             // Guardar el nuevo usuario/cliente en la base de datos
@@ -77,10 +75,8 @@ public class GestionUsuarioService implements IUsuarioServicio {
             logger.info("Usuario con ID {} y email {} creado exitosamente.", nuevoUsuario.getId(), nuevoUsuario.getEmail());
             return nuevoUsuario;
         } catch (DataIntegrityViolationException e) {
-            logger.error("Error de integridad de datos al guardar usuario (ej. restricción única violada): {}", e.getMessage(), e);
             throw new DataIntegrityViolationException("Error al guardar usuario debido a un problema de integridad de datos.", e);
         } catch (Exception e) {
-            logger.error("Error inesperado al crear usuario: {}", e.getMessage(), e);
             throw new RuntimeException("Error al crear usuario.", e);
         }
     }
@@ -140,10 +136,8 @@ public class GestionUsuarioService implements IUsuarioServicio {
             logger.info("Usuario con ID {} actualizado exitosamente.", usuarioActualizado.getId());
             return usuarioActualizado;
         } catch (DataIntegrityViolationException e) {
-            logger.error("Error de integridad de datos al actualizar usuario {}: {}", id, e.getMessage(), e);
             throw new DataIntegrityViolationException("Error al actualizar usuario debido a un problema de integridad de datos.", e);
         } catch (Exception e) {
-            logger.error("Error inesperado al actualizar usuario {}: {}", id, e.getMessage(), e);
             throw new RuntimeException("Error al actualizar usuario.", e);
         }
     }

@@ -4,16 +4,19 @@ package org.unsa.model.domain.usuarios;
 import jakarta.persistence.Entity; // Importar la anotacion Entity
 import jakarta.persistence.PrimaryKeyJoinColumn; // Para herencia JOINED
 import jakarta.persistence.Transient; // Para campos no persistentes
-import org.unsa.model.domain.restaurantes.HorarioAtencion;
-import org.unsa.model.domain.restaurantes.Plato;
-import org.unsa.model.domain.restaurantes.Restaurante;
-import java.util.logging.Level;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.logging.Logger;
 
 /**
  * Clase que representa un Administrador en el sistema.
  * Extiende de Usuario, demostrando Herencia (parte del estilo "Things").
  */
+@Setter
+@Getter
+@EqualsAndHashCode(callSuper = false)
 @Entity // Marca esta clase como una entidad JPA
 @PrimaryKeyJoinColumn(name = "id") // Especifica la columna de union con la tabla padre
 public class Administrador extends Usuario {
@@ -27,6 +30,7 @@ public class Administrador extends Usuario {
     private static final String SINGLE_QUOTE = "'";
     private static final String LOG_PREFIX_ADMIN = "Administrador ";
 
+    // --- Getters y Setters específicos de Administrador ---
     private String departamento;
 
     /**
@@ -50,14 +54,6 @@ public class Administrador extends Usuario {
         logger.info(() -> LOG_PREFIX_ADMIN + getNombre() + " creado con ID: " + getId());
     }
 
-    // --- Getters y Setters específicos de Administrador ---
-    public String getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(String departamento) {
-        this.departamento = departamento;
-    }
     /**
      * Representacion en cadena del objeto Administrador para depuracion.
      */

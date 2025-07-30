@@ -1,6 +1,8 @@
 // file: src/main/java/org/unsa/model/dominio/pedidos/DatosPlatoPedido.java
 package org.unsa.model.domain.pedidos;
 
+import lombok.Getter;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -9,9 +11,10 @@ import java.util.logging.Logger;
  * tal como se recibirian en un carrito de compras o una solicitud de pedido.
  * Es un DTO (Data Transfer Object) simple.
  */
+@Getter
 public class DatosPlatoPedido {
-    private Integer idPlato;
-    private int cantidad;
+    private final Integer idPlato;
+    private final int cantidad;
 
     private static final Logger logger = Logger.getLogger(DatosPlatoPedido.class.getName());
 
@@ -33,15 +36,6 @@ public class DatosPlatoPedido {
         this.idPlato = idPlato;
         this.cantidad = cantidad;
         logger.info(() -> "DatosPlatoPedido creado para plato ID: " + idPlato + ", cantidad: " + cantidad);
-    }
-
-    // Getters
-    public Integer getIdPlato() {
-        return idPlato;
-    }
-
-    public int getCantidad() {
-        return cantidad;
     }
 
     @Override

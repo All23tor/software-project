@@ -1,7 +1,6 @@
     package org.unsa.model.domain.pedidos;
 
     import jakarta.persistence.*; // Importa todas las anotaciones JPA
-    import org.unsa.model.domain.restaurantes.Plato;
     import org.unsa.model.domain.pedidos.Entrega;
     import org.unsa.model.domain.usuarios.Repartidor;
     import java.util.Date;

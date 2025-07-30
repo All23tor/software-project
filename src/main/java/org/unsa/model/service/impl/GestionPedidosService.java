@@ -22,6 +22,7 @@ import org.unsa.model.repository.RepartidorRepository;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,10 +60,11 @@ public class GestionPedidosService implements IPedidoServicio {
 
     /**
      * Crea un nuevo pedido en el sistema, encapsulando la logica del PedidoManager.
-     * @param idCliente Id del cliente que realiza el pedido.
-     * @param idRestaurante Id del restaurante al que se hace el pedido.
-     * @param itemsCarrito Lista de datos de platos y cantidades para el pedido.
-     * @param direccionEntrega Direccion de entrega del pedido.
+     *
+     * @param idCliente               Id del cliente que realiza el pedido.
+     * @param idRestaurante           Id del restaurante al que se hace el pedido.
+     * @param itemsCarrito            Lista de datos de platos y cantidades para el pedido.
+     * @param direccionEntrega        Direccion de entrega del pedido.
      * @param instruccionesEspeciales Instrucciones adicionales para el pedido (puede ser nulo).
      * @return El objeto Pedido recien creado.
      * @throws IllegalArgumentException Si los datos proporcionados son invalidos.
@@ -78,42 +80,33 @@ public class GestionPedidosService implements IPedidoServicio {
 
         logger.info("Solicitud para crear un nuevo pedido para cliente {} en restaurante {}", idCliente, idRestaurante);
 
-        try {
-            Cliente cliente = clienteRepository.findById(idCliente)
-                    .orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado con ID: " + idCliente));
-            Restaurante restaurante = restauranteRepository.findById(idRestaurante)
-                    .orElseThrow(() -> new IllegalArgumentException("Restaurante no encontrado con ID: " + idRestaurante));
+        Cliente cliente = clienteRepository.findById(idCliente)
+                .orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado con ID: " + idCliente));
+        Restaurante restaurante = restauranteRepository.findById(idRestaurante)
+                .orElseThrow(() -> new IllegalArgumentException("Restaurante no encontrado con ID: " + idRestaurante));
 
-            Pedido nuevoPedido = new Pedido();
-            nuevoPedido.setCliente(cliente);
-            nuevoPedido.setRestaurante(restaurante);
-            nuevoPedido.setDireccionEntrega(direccionEntrega);
-            nuevoPedido.setInstruccionesEspeciales(instruccionesEspeciales);
-            nuevoPedido.setEstado(EstadoPedido.PENDIENTE);
+        Pedido nuevoPedido = new Pedido();
+        nuevoPedido.setCliente(cliente);
+        nuevoPedido.setRestaurante(restaurante);
+        nuevoPedido.setDireccionEntrega(direccionEntrega);
+        nuevoPedido.setInstruccionesEspeciales(instruccionesEspeciales);
+        nuevoPedido.setEstado(EstadoPedido.PENDIENTE);
 
-            for (DatosPlatoPedido itemDto : itemsCarrito) {
-                Plato plato = platoRepository.findById(itemDto.getIdPlato())
-                        .orElseThrow(() -> new IllegalArgumentException("Plato no encontrado con ID: " + itemDto.getIdPlato()));
+        for (DatosPlatoPedido itemDto : itemsCarrito) {
+            Plato plato = platoRepository.findById(itemDto.getIdPlato())
+                    .orElseThrow(() -> new IllegalArgumentException("Plato no encontrado con ID: " + itemDto.getIdPlato()));
 
-                ItemPedido item = new ItemPedido();
-                item.setPlato(plato);
-                item.setCantidad(itemDto.getCantidad());
-                item.setPedido(nuevoPedido);
-                nuevoPedido.getItems().add(item);
-            }
-
-            Pedido pedidoGuardado = pedidoRepository.save(nuevoPedido);
-
-            logger.info("Pedido creado exitosamente con ID: {}", pedidoGuardado.getIdPedido());
-            return pedidoGuardado;
-
-        } catch (IllegalArgumentException e) {
-            logger.error("Fallo al crear pedido: {}", e.getMessage(), e);
-            throw e;
-        } catch (Exception e) {
-            logger.error("Error inesperado al crear pedido: {}", e.getMessage(), e);
-            throw new RuntimeException("Error al crear pedido", e);
+            ItemPedido item = new ItemPedido();
+            item.setPlato(plato);
+            item.setCantidad(itemDto.getCantidad());
+            item.setPedido(nuevoPedido);
+            nuevoPedido.getItems().add(item);
         }
+
+        Pedido pedidoGuardado = pedidoRepository.save(nuevoPedido);
+
+        logger.info("Pedido creado exitosamente con ID: {}", pedidoGuardado.getIdPedido());
+        return pedidoGuardado;
     }
 
 
@@ -123,6 +116,7 @@ public class GestionPedidosService implements IPedidoServicio {
         logger.info("Obteniendo pedidos para cliente con ID: {}", idCliente);
         return pedidoRepository.findByCliente_Id(idCliente);
     }
+
     @Override
     @Transactional
     public void actualizarEstadoPedido(Integer idPedido, EstadoPedido nuevoEstado) {
@@ -182,6 +176,7 @@ public class GestionPedidosService implements IPedidoServicio {
         pedidoRepository.save(pedido);
         logger.info("Pedido {} confirmado como ENTREGADO.", idPedido);
     }
+
     @Override
     @Transactional(readOnly = true)
     public Pedido obtenerPedidoPorId(Integer idPedido) {

@@ -7,8 +7,5 @@ import org.unsa.model.domain.usuarios.Repartidor;
 import java.util.Optional;
 @Repository
 public interface RepartidorRepository extends JpaRepository<Repartidor, Integer> {
-    // Métodos específicos para Repartidor, ej:
-    // List<Repartidor> findByTipoVehiculo(String tipoVehiculo);
-    // List<Repartidor> findByDisponibleParaEntregasTrue();
     Optional<Repartidor> findById(Integer id);
 }
