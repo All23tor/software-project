@@ -1,6 +1,6 @@
 export const categories = [
     {
-        name: "Burgers",
+        name: "Hamburguesas",
         icon: "🍔",
         img: "https://thestayathomechef.com/wp-content/uploads/2013/10/The-Perfect-Burger-H1-1200x720.jpg",
     },
@@ -25,17 +25,17 @@ export const categories = [
         img: "https://s.lightorangebean.com/media/20240914160809/Spicy-Penne-Pasta_-done.png",
     },
     {
-        name: "Salads",
+        name: "Ensaladas",
         icon: "🥗",
         img: "https://www.tasteofhome.com/wp-content/uploads/2025/02/Favorite-Mediterranean-Salad_EXPS_TOHcom25_41556_MD_P2_02_05_1b.jpg",
     },
     {
-        name: "Desserts",
+        name: "Postres",
         icon: "🍰",
         img: "https://cdn.hswstatic.com/gif/desserts-update.jpg",
     },
     {
-        name: "Drinks",
+        name: "Refrescos",
         icon: "🥤",
         img: "https://www.beanilla.com/wp/wp-content/uploads/2022/06/RefreshingDrinks.jpg",
     },

@@ -1,7 +1,7 @@
 <template>
   <div class="menu-card">
-    <h1>🍔 Welcome to QuickBite!</h1>
-    <p class="tagline">Delicious food, delivered fast.</p>
+    <h1>🍔 Bienvenido a SueldoMínimo!</h1>
+    <p class="tagline">Comida mediocre, a precios sospechosos.</p>
 
     <div class="highlight-image">
       <img :src="selected.img" :alt="selected.name" />
@@ -13,7 +13,7 @@
         @select="selectCategory"
     />
 
-    <button @click="startOrder">Start Order 🍽️</button>
+    <button @click="startOrder">Realizar orden 🍽️</button>
   </div>
 </template>
 
