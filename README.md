@@ -665,22 +665,50 @@ public class Usuario {
 Cada clase tiene una única responsabilidad. Por ejemplo, la clase Usuario maneja solo la información y comportamiento relacionado con los usuarios.
 
 ```java
-@Entity
-@Table(name = "usuarios")
-public class Usuario {
-    private String nombre;
-    private String email;
-    private String telefono;
-    private boolean activo;
+public class PedidoManager implements IPedidoServicio {
+    private final PedidoRepository pedidoRepository;
+    private final ClienteRepository clienteRepository;
+    private final RestauranteRepository restauranteRepository;
+    private final RepartidorRepository repartidorRepository;
 
-    public void activarCuenta() {
-        this.activo = true;
-        logger.info(() -> "Cuenta de usuario activada.");
+    @Override
+    public Pedido obtenerPedidoPorId(Integer idPedido) {
+        return pedidoRepository.findById(idPedido).orElseThrow(() -> new RuntimeException("Pedido no encontrado con ID: " + idPedido));
     }
 
-    public void desactivarCuenta() {
-        this.activo = false;
-        logger.info(() -> "Cuenta de usuario desactivada.");
+    @Override
+    public List<Pedido> obtenerPedidosPorCliente(Integer idCliente) {
+        return pedidoRepository.findByCliente_Id(idCliente);
+    }
+
+    @Override
+    public void actualizarEstadoPedido(Integer idPedido, EstadoPedido nuevoEstado) {
+        Pedido pedido = obtenerPedidoPorId(idPedido);
+        pedido.setEstado(nuevoEstado);
+        pedidoRepository.save(pedido);
+    }
+
+    @Override
+    public void asignarRepartidorAPedido(Integer idPedido, Integer idRepartidor) {
+        Pedido pedido = obtenerPedidoPorId(idPedido);
+        Repartidor repartidor = repartidorRepository.findById(idRepartidor).orElseThrow(() -> new RuntimeException("Repartidor no encontrado con ID: " + idRepartidor));
+        pedido.setRepartidor(repartidor);
+        pedido.setEstado(EstadoPedido.EN_CAMINO);
+        pedidoRepository.save(pedido);
+    }
+
+    @Override
+    public void cancelarPedido(Integer idPedido, Integer idUsuario) {
+        Pedido pedido = obtenerPedidoPorId(idPedido);
+        pedido.setEstado(EstadoPedido.CANCELADO);
+        pedidoRepository.save(pedido);
+    }
+
+    @Override
+    public void confirmarEntrega(Integer idPedido) {
+        Pedido pedido = obtenerPedidoPorId(idPedido);
+        pedido.setEstado(EstadoPedido.ENTREGADO);
+        pedidoRepository.save(pedido);
     }
 }
 ```
@@ -714,9 +742,21 @@ public class Usuario {
     }
 }
 
+public class Administrador extends Usuario
+public class Cliente extends Usuario
+public class Repartidor extends Usuario
+
 // Esto funcionará igual si Cliente extiende Usuario:
 Usuario u = new Cliente();
 u.setEmail("ejemplo@correo.com");
+```
+
+#### 4. Dependency Inversion Principle (DIP)
+El controlador `PedidoManager` aplica correctamente el Principio de Inversión de Dependencias (DIP) al depender de la abstracción `IPedidoServicio` en lugar de una implementación concreta.
+```java
+public class PedidoManager implements IPedidoServicio {
+   // ...
+}
 ```
 
 ### Domain-driven Design (DDD)
