@@ -1,5 +1,5 @@
 // file: src/main/java/org/unsa/service/interfaces/IPedidoServicio.java
-package org.unsa.model.service.Interfaces;
+package org.unsa.model.service.interfaces;
 
 import org.unsa.model.domain.pedidos.Pedido;
 import org.unsa.model.domain.pedidos.DatosPlatoPedido;

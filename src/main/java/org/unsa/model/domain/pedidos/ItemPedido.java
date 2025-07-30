@@ -4,7 +4,6 @@ package org.unsa.model.domain.pedidos;
 import jakarta.persistence.*;
 import org.unsa.model.domain.restaurantes.Dinero;
 import org.unsa.model.domain.restaurantes.Plato;
-import org.unsa.model.domain.pedidos.Pedido;
 
 import java.util.Objects;
 import java.util.logging.Level;

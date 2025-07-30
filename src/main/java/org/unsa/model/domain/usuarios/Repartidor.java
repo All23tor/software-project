@@ -15,8 +15,10 @@ import java.util.logging.Logger;
 @Setter
 @Entity // Marca esta clase como una entidad JPA
 @PrimaryKeyJoinColumn(name = "id") // Especifica la columna de union con la tabla padre
+@EqualsAndHashCode(callSuper = false)
 public class Repartidor extends Usuario {
 
+    // --- Getters y Setters especificos de Repartidor ---
     private String tipoVehiculo; // Ejemplo: "Moto", "Bicicleta", "Auto"
     private boolean disponibleParaEntregas; // Estado de disponibilidad
     @Transient // Indica que este campo no se mapeara a la base de datos
@@ -52,18 +54,9 @@ public class Repartidor extends Usuario {
         logger.info(() -> "Repartidor creado con ID: " + getId() + ", nombre: " + getNombre());
     }
 
-    // --- Getters y Setters especificos de Repartidor ---
-    public String getTipoVehiculo() {
-        return tipoVehiculo;
-    }
-
     public void setTipoVehiculo(String tipoVehiculo) {
         this.tipoVehiculo = tipoVehiculo;
         logger.info(() -> "Tipo de vehiculo actualizado para repartidor " + getId() + " a: " + tipoVehiculo);
-    }
-
-    public boolean isDisponibleParaEntregas() {
-        return disponibleParaEntregas;
     }
 
     public void setDisponibleParaEntregas(boolean disponibleParaEntregas) {

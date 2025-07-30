@@ -7,6 +7,4 @@ import org.unsa.model.domain.usuarios.Cliente; // Asegúrate de que esta ruta se
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
-    // Métodos específicos para Cliente, ej:
-    // List<Cliente> findByPreferenciasAlimentariasContaining(String preferencia);
 }

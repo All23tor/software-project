@@ -13,7 +13,7 @@ import org.unsa.model.domain.usuarios.Repartidor;
 import org.unsa.model.domain.pedidos.DatosPlatoPedido;
 import org.unsa.model.domain.pedidos.EstadoPedido;
 import org.unsa.model.domain.usuarios.Direccion;
-import org.unsa.model.service.Interfaces.IPedidoServicio;
+import org.unsa.model.service.interfaces.IPedidoServicio;
 import org.unsa.model.repository.PedidoRepository;
 import org.unsa.model.repository.ClienteRepository;
 import org.unsa.model.repository.RestauranteRepository;
@@ -117,12 +117,14 @@ public class GestionPedidosService implements IPedidoServicio {
         return pedidoRepository.findByCliente_Id(idCliente);
     }
 
+    private static final String PEDIDO_ID = "Pdido con ID ";
+    
     @Override
     @Transactional
     public void actualizarEstadoPedido(Integer idPedido, EstadoPedido nuevoEstado) {
         logger.info("Actualizando estado del pedido {} a: {}", idPedido, nuevoEstado);
         Pedido pedido = pedidoRepository.findById(idPedido)
-                .orElseThrow(() -> new IllegalArgumentException("Pedido con ID " + idPedido + " no encontrado."));
+                .orElseThrow(() -> new IllegalArgumentException(PEDIDO_ID + idPedido + " no encontrado."));
         pedido.actualizarEstado(nuevoEstado); // Asume que este método en Pedido valida la transición
         pedidoRepository.save(pedido); // Guarda los cambios
         logger.info("Estado de pedido {} actualizado a {} .", idPedido, nuevoEstado);
@@ -135,7 +137,7 @@ public class GestionPedidosService implements IPedidoServicio {
         Optional<Repartidor> repartidorOpt = repartidorRepository.findById(idRepartidor);
 
         if (pedidoOpt.isEmpty()) {
-            throw new IllegalArgumentException("Pedido con ID " + idPedido + " no encontrado.");
+            throw new IllegalArgumentException(PEDIDO_ID + idPedido + " no encontrado.");
         }
 
         if (repartidorOpt.isEmpty()) {
@@ -154,7 +156,7 @@ public class GestionPedidosService implements IPedidoServicio {
     public void cancelarPedido(Integer idPedido, Integer idUsuario) {
         logger.info("Cancelando pedido {} por usuario {}", idPedido, idUsuario);
         Pedido pedido = pedidoRepository.findById(idPedido)
-                .orElseThrow(() -> new IllegalArgumentException("Pedido con ID " + idPedido + " no encontrado para cancelar."));
+                .orElseThrow(() -> new IllegalArgumentException(PEDIDO_ID + idPedido + " no encontrado para cancelar."));
         if (pedido.getCliente() == null) {
             throw new IllegalStateException("El pedido con ID " + idPedido + " no tiene un cliente asociado.");
         }
@@ -171,7 +173,7 @@ public class GestionPedidosService implements IPedidoServicio {
     public void confirmarEntrega(Integer idPedido) {
         logger.info("Confirmando entrega del pedido {}", idPedido);
         Pedido pedido = pedidoRepository.findById(idPedido)
-                .orElseThrow(() -> new IllegalArgumentException("Pedido con ID " + idPedido + " no encontrado para confirmar entrega."));
+                .orElseThrow(() -> new IllegalArgumentException(PEDIDO_ID + idPedido + " no encontrado para confirmar entrega."));
         pedido.actualizarEstado(EstadoPedido.ENTREGADO); // Asume que este método en Pedido actualiza a ENTREGADO
         pedidoRepository.save(pedido);
         logger.info("Pedido {} confirmado como ENTREGADO.", idPedido);

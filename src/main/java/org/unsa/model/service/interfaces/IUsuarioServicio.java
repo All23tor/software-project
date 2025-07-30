@@ -1,5 +1,4 @@
-// file: src/main/java/org/unsa/model/service/Interfaces/IUsuarioServicio.java
-package org.unsa.model.service.Interfaces;
+package org.unsa.model.service.interfaces;
 
 import org.unsa.model.domain.usuarios.Usuario; // O tu entidad base de usuario
 import org.unsa.model.dtos.CrearUsuarioRequest; // Suponiendo estos DTOs
@@ -13,6 +12,4 @@ public interface IUsuarioServicio {
     List<Usuario> obtenerTodosLosUsuarios();
     Usuario actualizarUsuario(Integer id, ActualizarUsuarioRequest request);
     void eliminarUsuario(Integer id);
-    // Puedes añadir métodos específicos para Cliente, Repartidor, Admin si es necesario
-    // Ejemplo: Cliente registrarCliente(CrearClienteRequest request);
 }

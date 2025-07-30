@@ -18,6 +18,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity // Marca esta clase como una entidad JPA
 @PrimaryKeyJoinColumn(name = "id") // Especifica la columna de union con la tabla padre
+@EqualsAndHashCode(callSuper = false)
 public class Cliente extends Usuario {
 
     private String preferenciasAlimentarias; // Ejemplo de atributo especifico de Cliente

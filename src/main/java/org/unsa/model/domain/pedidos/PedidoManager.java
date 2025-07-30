@@ -10,10 +10,9 @@ import org.unsa.model.repository.ClienteRepository;
 import org.unsa.model.repository.PedidoRepository;
 import org.unsa.model.repository.RepartidorRepository;
 import org.unsa.model.repository.RestauranteRepository;
-import org.unsa.model.service.Interfaces.IPedidoServicio;
+import org.unsa.model.service.interfaces.IPedidoServicio;
 
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
@@ -27,8 +26,7 @@ public class PedidoManager implements IPedidoServicio {
     private final RestauranteRepository restauranteRepository;
     private final RepartidorRepository repartidorRepository;
 
-    public Pedido crearNuevoPedido(Integer idCliente, Integer idRestaurante, List<DatosPlatoPedido> itemsCarrito, Direccion direccionEntrega, String instruccionesEspeciales) {
-        try {
+    public Pedido crearNuevoPedido(Integer idCliente, Integer idRestaurante, Direccion direccionEntrega, String instruccionesEspeciales) {
             Cliente cliente = clienteRepository.findById(idCliente)
                     .orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + idCliente));
             Restaurante restaurante = restauranteRepository.findById(idRestaurante)
@@ -41,21 +39,14 @@ public class PedidoManager implements IPedidoServicio {
             pedido.setInstruccionesEspeciales(instruccionesEspeciales);
             pedido.setEstado(EstadoPedido.PENDIENTE);
 
-            // Convertir DatosPlatoPedido -> ItemPedido aquí si es necesario
-            // pedido.setItems(convertirItems(itemsCarrito));
-
             Pedido pedidoGuardado = pedidoRepository.save(pedido);
             logger.info("Pedido creado exitosamente con ID: " + pedidoGuardado.getIdPedido());
             return pedidoGuardado;
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Error al crear el pedido: " + e.getMessage(), e);
-            throw new RuntimeException("No se pudo crear el pedido.");
-        }
     }
 
     @Override
     public Pedido crearPedido(Integer idCliente, Integer idRestaurante, List<DatosPlatoPedido> itemsCarrito, Direccion direccionEntrega, String instruccionesEspeciales) {
-        return crearNuevoPedido(idCliente, idRestaurante, itemsCarrito, direccionEntrega, instruccionesEspeciales);
+        return crearNuevoPedido(idCliente, idRestaurante, direccionEntrega, instruccionesEspeciales);
     }
 
     @Override

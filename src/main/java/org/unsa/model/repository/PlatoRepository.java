@@ -3,7 +3,6 @@
 package org.unsa.model.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 import org.unsa.model.domain.restaurantes.Plato;
 
 import java.util.List;

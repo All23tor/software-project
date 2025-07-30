@@ -4,7 +4,7 @@ package org.unsa.model.controller;
 import org.unsa.model.domain.usuarios.Usuario;
 import org.unsa.model.dtos.CrearUsuarioRequest;
 import org.unsa.model.dtos.ActualizarUsuarioRequest;
-import org.unsa.model.service.Interfaces.IUsuarioServicio;
+import org.unsa.model.service.interfaces.IUsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,3 @@
-// file: src/main/java/org/unsa/service/restaurantes/CatalogoRestaurantesService.java
 package org.unsa.model.service.impl;
 
 import org.unsa.model.domain.restaurantes.Restaurante;
@@ -7,18 +6,17 @@ import org.unsa.model.domain.restaurantes.TipoCocina;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 /**
  * Clase de servicio para la gestion y consulta del catalogo de restaurantes.
- * Se encarga de la logica de negocio relacionada con la busqueda y obtencion de restaurantes.
+ * Se encarga de la lógica de negocio relacionada con la búsqueda y obtención de restaurantes.
  */
 public class CatalogoRestaurantesService {
 
     private static final Logger logger = Logger.getLogger(CatalogoRestaurantesService.class.getName());
 
-    // SIMULACION: Lista de restaurantes para propositos de demostracion.
-    // En una aplicacion real, esto interactuaria con un RestauranteRepository.
+    // SIMULACIÓN: Lista de restaurantes para propósitos de demostración.
+    // En una aplicación real, esto interactuaría con un RestauranteRepository.
     private final List<Restaurante> restaurantesSimulados;
 
     /**
@@ -37,13 +35,13 @@ public class CatalogoRestaurantesService {
     }
 
     /**
-     * Busca restaurantes por un texto dado en su nombre, direccion o tipo de cocina.
-     * @param texto El texto a buscar (puede ser nulo o vacio para obtener todos).
-     * @return Una lista de restaurantes que coinciden con el criterio de busqueda.
+     * Busca restaurantes por un texto dado en su nombre, dirección o tipo de cocina.
+     * @param texto El texto a buscar (puede ser nulo o vació para obtener todos).
+     * @return Una lista de restaurantes que coinciden con el criterio de búsqueda.
      */
     public List<Restaurante> buscarPorTexto(String texto) {
         if (texto == null || texto.trim().isEmpty()) {
-            logger.info(() -> "Busqueda de restaurantes sin texto. Obteniendo todos.");
+            logger.info(() -> "Búsqueda de restaurantes sin texto. Obteniendo todos.");
             return obtenerTodos();
         }
 
@@ -52,22 +50,22 @@ public class CatalogoRestaurantesService {
                 .filter(r -> r.getNombre().toLowerCase().contains(textoLowerCase) ||
                         r.getDireccion().toLowerCase().contains(textoLowerCase) ||
                         r.getTipoCocina().name().toLowerCase().contains(textoLowerCase)) // Compara con el nombre del enum
-                .collect(Collectors.toList());
+                .toList();
 
-        logger.info(() -> "Busqueda por texto '" + texto + "' resulto en " + resultados.size() + " restaurantes.");
+        logger.info(() -> "Búsqueda por texto '" + texto + "' resulto en " + resultados.size() + " restaurantes.");
         return resultados;
     }
 
     /**
-     * Obtiene una lista de todos los restaurantes disponibles en el catalogo.
+     * Obtiene una lista de todos los restaurantes disponibles en el catálogo.
      * @return Una lista de todos los objetos Restaurante.
      */
     public List<Restaurante> obtenerTodos() {
         logger.info(() -> "Obteniendo todos los " + restaurantesSimulados.size() + " restaurantes.");
-        return new ArrayList<>(restaurantesSimulados); // Retorna una copia para evitar modificacion externa
+        return new ArrayList<>(restaurantesSimulados); // Retorna una copia para evitar modificación externa
     }
 
-    // NOTA: Los metodos como 'asignarRepartidorAPedido', 'actualizarEstadoEntrega' y 'crearNuevoPedido'
+    // NOTA: Los métodos como 'asignarRepartidorAPedido', 'actualizarEstadoEntrega' y 'crearNuevoPedido'
     // fueron eliminados de esta clase porque no corresponden a la responsabilidad de un
-    // CatalogoRestaurantesService. Esos metodos pertenecen a un servicio de Pedidos (ej. PedidoManager).
+    // CatalogoRestaurantesService. Esos métodos pertenecen a un servicio de Pedidos (ej. PedidoManager).
 }

@@ -8,15 +8,15 @@ import org.springframework.dao.DataIntegrityViolationException;
 
 import org.unsa.model.domain.usuarios.Usuario;
 import org.unsa.model.domain.usuarios.Cliente;
-import org.unsa.model.domain.usuarios.Direccion;
 import org.unsa.model.dtos.CrearUsuarioRequest;
 import org.unsa.model.dtos.ActualizarUsuarioRequest;
-import org.unsa.model.service.Interfaces.IUsuarioServicio;
+import org.unsa.model.service.interfaces.IUsuarioServicio;
 import org.unsa.model.repository.UsuarioRepository;
 import org.unsa.model.repository.ClienteRepository;
 
 import java.util.List;
 import java.util.Optional; //manejar si no existen
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +25,8 @@ import org.slf4j.LoggerFactory;
  * Contiene la logica de negocio para operaciones CRUD de usuarios.
  */
 @Service // Indica a Spring que esta clase es un bean de servicio
-@org.springframework.context.annotation.Primary // Si hay multiples implementaciones de IUsuarioServicio y esta es la predeterminada
+@org.springframework.context.annotation.Primary
+// Si hay multiples implementaciones de IUsuarioServicio y esta es la predeterminada
 public class GestionUsuarioService implements IUsuarioServicio {
 
     private static final Logger logger = LoggerFactory.getLogger(GestionUsuarioService.class);
@@ -76,8 +77,6 @@ public class GestionUsuarioService implements IUsuarioServicio {
             return nuevoUsuario;
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityViolationException("Error al guardar usuario debido a un problema de integridad de datos.", e);
-        } catch (Exception e) {
-            throw new RuntimeException("Error al crear usuario.", e);
         }
     }
 
@@ -87,8 +86,7 @@ public class GestionUsuarioService implements IUsuarioServicio {
         logger.info("Buscando usuario con ID: {}", id);
         // Usa findById que devuelve un Optional
         return usuarioRepository.findById(id)
-                .orElse(null); // Retorna null si no lo encuentra, o puedes lanzar una excepción
-        // .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado con ID: " + id));
+                .orElse(null); // Retorna null si no lo encuentra
     }
 
     @Override
@@ -137,8 +135,6 @@ public class GestionUsuarioService implements IUsuarioServicio {
             return usuarioActualizado;
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityViolationException("Error al actualizar usuario debido a un problema de integridad de datos.", e);
-        } catch (Exception e) {
-            throw new RuntimeException("Error al actualizar usuario.", e);
         }
     }
 
@@ -152,13 +148,8 @@ public class GestionUsuarioService implements IUsuarioServicio {
             throw new IllegalArgumentException("Usuario no encontrado con ID: " + id);
         }
 
-        try {
-            usuarioRepository.deleteById(id);
-            logger.info("Usuario con ID {} eliminado exitosamente.", id);
-        } catch (Exception e) {
-            logger.error("Error al eliminar usuario con ID {}: {}", id, e.getMessage(), e);
-            throw new RuntimeException("Error al eliminar usuario.", e);
-        }
+        usuarioRepository.deleteById(id);
+        logger.info("Usuario con ID {} eliminado exitosamente.", id);
     }
 
     // Puedes añadir un método para buscar por email si lo necesitas a menudo

@@ -6,7 +6,7 @@ import org.unsa.model.domain.restaurantes.Plato;
 import org.unsa.model.domain.restaurantes.Dinero;
 import org.unsa.model.repository.PlatoRepository;
 import org.unsa.model.repository.RestauranteRepository;
-import org.unsa.model.service.Interfaces.IPlatilloServicio;
+import org.unsa.model.service.interfaces.IPlatilloServicio;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,12 +52,14 @@ public class GestionPlatillosService implements IPlatilloServicio {
         return platos;
     }
 
+    private static final String NO_ENCONTRADO = "Platillo no encontrado";
+
     @Override
     public Plato verDetallePlatillo(Integer idPlatillo) {
         return platoRepository.findById(idPlatillo)
                 .orElseThrow(() -> {
                     logger.warn("Platillo con ID {} no encontrado", idPlatillo);
-                    return new IllegalArgumentException("Platillo no encontrado");
+                    return new IllegalArgumentException(NO_ENCONTRADO);
                 });
     }
 
@@ -66,7 +68,7 @@ public class GestionPlatillosService implements IPlatilloServicio {
         var plato = platoRepository.findById(idPlatillo)
                 .orElseThrow(() -> {
                     logger.warn("Platillo con ID {} no encontrado", idPlatillo);
-                    return new IllegalArgumentException("Platillo no encontrado");
+                    return new IllegalArgumentException(NO_ENCONTRADO);
                 });
 
         plato.setNombre(nombre);
@@ -83,7 +85,7 @@ public class GestionPlatillosService implements IPlatilloServicio {
     public void eliminarPlatillo(Integer idPlatillo) {
         if (!platoRepository.existsById(idPlatillo)) {
             logger.warn("Intento de eliminar platillo inexistente con ID {}", idPlatillo);
-            throw new IllegalArgumentException("Platillo no encontrado");
+            throw new IllegalArgumentException(NO_ENCONTRADO);
         }
 
         platoRepository.deleteById(idPlatillo);
@@ -95,7 +97,7 @@ public class GestionPlatillosService implements IPlatilloServicio {
         var plato = platoRepository.findById(idPlatillo)
                 .orElseThrow(() -> {
                     logger.warn("Platillo con ID {} no encontrado al marcar disponibilidad", idPlatillo);
-                    return new IllegalArgumentException("Platillo no encontrado");
+                    return new IllegalArgumentException(NO_ENCONTRADO);
                 });
 
         plato.setDisponible(disponible);

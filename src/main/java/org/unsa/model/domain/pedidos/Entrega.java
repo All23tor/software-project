@@ -1,7 +1,6 @@
     package org.unsa.model.domain.pedidos;
 
     import jakarta.persistence.*; // Importa todas las anotaciones JPA
-    import org.unsa.model.domain.pedidos.Entrega;
     import org.unsa.model.domain.usuarios.Repartidor;
     import java.util.Date;
     import java.util.Objects;
@@ -97,6 +96,8 @@
             logger.info("Entrega ID  {}  asignada a Repartidor ID {} ",id,repartidor.getId());
         }
 
+        private static String idString = "Entrega ID ";
+
         /**
          * Actualiza el estado de la entrega.
          * @param nuevoEstado El nuevo estado de la entrega.
@@ -109,7 +110,7 @@
                 throw new IllegalStateException("No se puede cambiar el estado de una entrega ya completada a menos que sea una incidencia.");
             }
             this.estado = nuevoEstado;
-            logger.info("Entrega ID " + id + " cambió a estado: " + nuevoEstado);
+            logger.info("{}{} cambió a estado: {}", idString , id, nuevoEstado);
         }
 
         /**
@@ -121,7 +122,7 @@
             }
             this.estado = EstadoEntrega.RECOGIDO;
             this.fechaHoraRecojo = new Date();
-            logger.info("Entrega ID " + id + ": Pedido recogido.");
+            logger.info("{}{}: Pedido recogido.", idString, id);
         }
 
         /**
@@ -133,7 +134,7 @@
             }
             this.estado = EstadoEntrega.PROPORCIONADO;
             this.fechaHoraEntrega = new Date();
-            logger.info("Entrega ID " + id + ": Pedido entregado.");
+            logger.info("{}{}: Pedido entregado.", idString, id);
         }
 
 
@@ -143,7 +144,7 @@
          */
         public void actualizarUbicacion(String coordenadas) {
             this.ubicacionActualRepartidor = coordenadas;
-            logger.info("Entrega ID " + id + ": Ubicación actualizada a: " + coordenadas);
+            logger.info("{}{}: Ubicación actualizada a: {}", idString, id, coordenadas);
         }
 
         @Override

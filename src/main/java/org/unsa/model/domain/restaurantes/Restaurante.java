@@ -2,6 +2,9 @@
 package org.unsa.model.domain.restaurantes;
 
 import jakarta.persistence.*; // Importar todas las anotaciones de JPA
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,16 +13,21 @@ import java.util.logging.Logger;
  * Clase que representa un Restaurante en el sistema SueldoMinimo App.
  * Demuestra el estilo "Things" (POO) con encapsulacion y responsabilidades claras.
  */
+@Getter
 @Entity // Marca esta clase como una entidad JPA
 @Table(name = "restaurantes") // Mapea esta entidad a la tabla "restaurantes"
 public class Restaurante {
     @Id // Marca 'id' como la clave primaria
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Indica que el ID sera autoincremental por la DB
     private Integer id; // Cambiado a int
+    @Setter
     @Column(nullable = false) // El nombre no puede ser nulo
     private String nombre;
+    @Setter
     private String direccion;
+    @Setter
     private String telefono;
+    @Setter
     @Enumerated(EnumType.STRING) // Almacena el enum como String en la DB
     @Column(nullable = false) // El tipo de cocina no puede ser nulo
     private TipoCocina tipoCocina;
@@ -76,27 +84,14 @@ public class Restaurante {
 
     // --- Getters y Setters ---
 
-    public Integer getId() { return id; }
     public void setId(Integer id) {
         if (id <= 0 && id != 0) { // Permitir 0 para que JPA lo autogenere
-            logger.log(Level.WARNING, "Intento de establecer ID de restaurante invalido: " + id);
+            logger.log(Level.WARNING, "Intento de establecer ID de restaurante invalido: {}", id);
             throw new IllegalArgumentException("El ID debe ser positivo o 0 para autogeneracion.");
         }
         this.id = id;
         logger.info(() -> "ID de restaurante actualizado a: " + id);
     }
-
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
-
-    public String getDireccion() { return direccion; }
-    public void setDireccion(String direccion) { this.direccion = direccion; }
-
-    public String getTelefono() { return telefono; }
-    public void setTelefono(String telefono) { this.telefono = telefono; }
-
-    public TipoCocina getTipoCocina() { return tipoCocina; }
-    public void setTipoCocina(TipoCocina tipoCocina) { this.tipoCocina = tipoCocina; }
 
     /**
      * Representacion en cadena del objeto Restaurante para depuracion.

@@ -62,10 +62,8 @@ public class HorarioAtencion {
             logger.info(() -> "HorarioAtencion creado: " + this.toString());
 
         } catch (java.time.format.DateTimeParseException e) {
-            logger.log(Level.SEVERE, "Error de formato de hora al crear HorarioAtencion: " + e.getMessage(), e);
             throw new IllegalArgumentException("Formato de hora invalido. Use HH:mm. Detalles: " + e.getMessage());
         } catch (IllegalArgumentException e) {
-            logger.log(Level.SEVERE, "Error de dia invalido al crear HorarioAtencion: " + e.getMessage(), e);
             throw e; // Re-lanzar la excepcion de dia invalido
         }
     }
@@ -97,7 +95,7 @@ public class HorarioAtencion {
             horaActual = LocalTime.parse(horaActualStr, FORMATO_HORA);
             diaActual = parseDia(diaActualStr);
         } catch (java.time.format.DateTimeParseException | IllegalArgumentException e) {
-            logger.log(Level.WARNING, "Parametros de hora/dia invalidos para estaAbiertoAhora: " + horaActualStr + ", " + diaActualStr, e);
+            logger.log(Level.WARNING, String.format("Parámetros de hora/dia inválidos para estaAbiertoAhora: %s, %s", horaActualStr, diaActualStr), e);
             return false;
         }
 
@@ -134,7 +132,6 @@ public class HorarioAtencion {
             case "sabado": return DayOfWeek.SATURDAY;
             case "domingo": return DayOfWeek.SUNDAY;
             default:
-                logger.log(Level.WARNING, "Dia invalido proporcionado: " + dia);
                 throw new IllegalArgumentException("Día inválido: " + dia);
         }
     }

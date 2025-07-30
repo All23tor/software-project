@@ -77,7 +77,7 @@ public class Usuario {
         this.id = id; // Si id es 0, JPA lo autogenerara
         this.nombre = nombre;
         if (email == null || !email.contains("@")) {
-            logger.log(Level.SEVERE, "Intento de crear usuario con email invalido: " + email);
+            logger.log(Level.SEVERE, "Intento de crear usuario con email invalido: {}", email);
             throw new IllegalArgumentException("El email es invalido.");
         }
         this.email = email;
@@ -94,8 +94,8 @@ public class Usuario {
         // La validación de ID positivo es más relevante para Ids pasados manualmente
         // Con GenerationType.IDENTITY, la DB se encarga.
         if (id <= 0 && id != 0) { // Permitir 0 para que JPA lo autogenere
-            logger.log(Level.WARNING, "Intento de establecer ID de usuario invalido: " + id);
-            throw new IllegalArgumentException("El ID debe ser positivo o 0 para autogeneracion.");
+            logger.log(Level.WARNING, "Intento de establecer ID de usuario invalido: {}", id);
+            throw new IllegalArgumentException("El ID debe ser positivo o 0 para autogeneración.");
         }
         this.id = id;
         logger.info(() -> "ID de usuario actualizado a: " + id);
@@ -109,7 +109,7 @@ public class Usuario {
      */
     public void setEmail(String email) {
         if (email == null || !email.contains("@")) {
-            logger.log(Level.WARNING, "Intento de establecer email invalido para usuario " + this.id + ": " + email);
+            logger.log(Level.WARNING, "Intento de establecer email invalido {}", email);
             throw new IllegalArgumentException("El email es invalido.");
         }
         this.email = email;
@@ -117,6 +117,8 @@ public class Usuario {
     }
 
     // --- Métodos de Comportamiento (Parte del estilo "Things") ---
+
+    private static final String ID_STRING = "(ID: ";
 
     /**
      * Actualiza los datos de contacto (email y telefono) del usuario.
@@ -127,9 +129,9 @@ public class Usuario {
         try {
             setEmail(email); // Esto puede lanzar IllegalArgumentException
             this.telefono = telefono;
-            logger.info(() -> "Datos de contacto actualizados para usuario " + this.nombre + " (ID: " + this.id + ")");
+            logger.info(() -> "Datos de contacto actualizados para usuario " + this.nombre + ID_STRING + this.id + ")");
         } catch (IllegalArgumentException e) {
-            logger.log(Level.SEVERE, "Fallo al actualizar datos de contacto para usuario " + this.id + ": " + e.getMessage(), e);
+            logger.log(Level.SEVERE, String.format("Fallo al actualizar datos de contacto para usuario %d: %s", this.id, e.getMessage()), e);
         }
     }
 
@@ -138,7 +140,7 @@ public class Usuario {
      */
     public void activarCuenta() {
         this.activo = true;
-        logger.info(() -> "Cuenta de usuario " + this.nombre + " (ID: " + this.id + ") activada.");
+        logger.info(() -> "Cuenta de usuario " + this.nombre + ID_STRING + this.id + ") activada.");
     }
 
     /**
@@ -146,7 +148,7 @@ public class Usuario {
      */
     public void desactivarCuenta() {
         this.activo = false;
-        logger.info(() -> "Cuenta de usuario " + this.nombre + " (ID: " + this.id + ") desactivada.");
+        logger.info(() -> "Cuenta de usuario " + this.nombre + ID_STRING + this.id + ") desactivada.");
     }
 
     /**
