@@ -73,7 +73,7 @@ public class Usuario {
      * @param email    Correo electronico del usuario.
      * @param telefono Numero de telefono del usuario.
      */
-    public Usuario(Integer id, String nombre, String email, String telefono) { // ID cambiado a int
+    public Usuario(Integer id, String nombre, String email, String telefono) {
         // En un entorno real con GenerationType.IDENTITY, el ID no se pasaria
         // en el constructor para nuevas entidades, se dejaria a la DB.
         // Lo mantenemos para compatibilidad con TestUsuarios.java por ahora.
