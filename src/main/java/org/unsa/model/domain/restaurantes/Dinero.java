@@ -2,12 +2,14 @@
 package org.unsa.model.domain.restaurantes;
 
 import jakarta.persistence.Embeddable;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Embeddable
 @Getter
 @Setter
+@EqualsAndHashCode
 public class Dinero {
     private double valor;
     private String moneda;
