@@ -16,10 +16,6 @@ public class UsuarioTest {
     private static final String NOMBRE_BASE = "Carlos Test";
     private static final String EMAIL_BASE = "carlos@unsa.com";
     private static final String TELEFONO_BASE = "987654321";
-
-    /**
-     * Se ejecuta antes de cada método de prueba (@Test) para asegurar un objeto limpio.
-     */
     @BeforeEach
     public void setUp() { // Método de setup en JUnit 5 también puede ser público (o simplemente void)
         // Arrange: Inicializar el objeto con datos válidos
